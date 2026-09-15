@@ -5,69 +5,86 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>大鱼吃小鱼</title>
 <style>
-  :root{ --sea1:#0a3d6b; --sea2:#062a4d; }
+  :root{ --sea1:#54c6e8; --sea2:#0d6ea3; --deep:#0a3d63; }
   *{margin:0;padding:0;box-sizing:border-box}
-  html,body{width:100%;height:100%;overflow:hidden;background:#02182e;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;user-select:none;-webkit-user-select:none;touch-action:none}
+  html,body{width:100%;height:100%;overflow:hidden;background:#0b5f8f;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;user-select:none;-webkit-user-select:none;touch-action:none}
   #game{display:block;position:absolute;inset:0}
 
   .overlay{
     position:absolute;inset:0;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;gap:18px;
-    color:#eaf6ff;text-align:center;z-index:10;
-    background:radial-gradient(ellipse at 50% 20%, rgba(20,80,140,.55), rgba(2,18,40,.88));
-    backdrop-filter:blur(3px);
+    align-items:center;justify-content:center;gap:16px;
+    color:#eaf6ff;text-align:center;z-index:10;padding:18px;
+    background:radial-gradient(ellipse at 50% 12%, rgba(64,180,220,.22), rgba(6,42,72,.56));
+    -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);
     transition:opacity .3s ease;
   }
   .overlay.hidden{opacity:0;pointer-events:none}
   h1.title{
-    font-size:64px;letter-spacing:6px;font-weight:900;
-    background:linear-gradient(180deg,#fff,#7fd7ff 55%,#2ea6ff);
+    font-size:clamp(40px,10vw,68px);letter-spacing:4px;font-weight:900;
+    background:linear-gradient(180deg,#ffffff,#aef0ff 50%,#42c4ff);
     -webkit-background-clip:text;background-clip:text;color:transparent;
-    text-shadow:0 4px 24px rgba(0,180,255,.35);
+    filter:drop-shadow(0 4px 18px rgba(0,180,255,.45));
   }
-  .subtitle{font-size:16px;color:#9fd0f0;letter-spacing:2px;margin-top:-8px}
+  .subtitle{font-size:15px;color:#dff6ff;letter-spacing:2px;margin-top:-8px;text-shadow:0 1px 4px rgba(0,28,50,.55)}
   .btn{
-    min-width:220px;padding:14px 30px;font-size:20px;font-weight:700;letter-spacing:3px;
-    color:#fff;border:none;border-radius:30px;cursor:pointer;
-    background:linear-gradient(135deg,#1aa5ff,#0066d6);
-    box-shadow:0 6px 20px rgba(0,140,255,.4), inset 0 1px 0 rgba(255,255,255,.3);
-    transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
+    position:relative;overflow:hidden;
+    min-width:230px;padding:15px 32px;font-size:20px;font-weight:800;letter-spacing:3px;
+    color:#fff;border:none;border-radius:999px;cursor:pointer;
+    background:linear-gradient(135deg,#35c0ff,#0a86e8);
+    box-shadow:0 8px 22px rgba(0,150,255,.45), inset 0 2px 0 rgba(255,255,255,.35), inset 0 -3px 0 rgba(0,40,90,.18);
+    transition:transform .14s ease, box-shadow .14s ease, filter .14s ease;
   }
-  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,160,255,.55), inset 0 1px 0 rgba(255,255,255,.4)}
-  .btn:active{transform:translateY(1px)}
-  .btn.secondary{background:linear-gradient(135deg,#24c26d,#0a9d57);box-shadow:0 6px 20px rgba(0,220,130,.35), inset 0 1px 0 rgba(255,255,255,.3)}
-  .btn.ghost{background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 2px rgba(255,255,255,.25)}
+  .btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 14px 30px rgba(0,160,255,.6), inset 0 2px 0 rgba(255,255,255,.4), inset 0 -3px 0 rgba(0,40,90,.18)}
+  .btn:active{transform:translateY(1px) scale(.98);box-shadow:0 4px 12px rgba(0,150,255,.4), inset 0 2px 0 rgba(255,255,255,.3)}
+  .btn.secondary{background:linear-gradient(135deg,#3ee08a,#0fb56a);box-shadow:0 8px 22px rgba(0,220,130,.4), inset 0 2px 0 rgba(255,255,255,.35), inset 0 -3px 0 rgba(0,80,40,.18)}
+  .btn.ghost{background:rgba(255,255,255,.10);box-shadow:inset 0 0 0 2px rgba(255,255,255,.30)}
+  .btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none;filter:grayscale(.5)}
+  .btn-mini{min-width:0;padding:9px 20px;font-size:15px;letter-spacing:1px}
+  .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.45);transform:scale(0);animation:ripple .6s ease-out;pointer-events:none}
+  @keyframes ripple{to{transform:scale(2.7);opacity:0}}
   .card{
-    background:rgba(4,24,48,.7);border:1px solid rgba(120,200,255,.25);
-    border-radius:16px;padding:22px 28px;max-width:640px;
-    box-shadow:0 10px 40px rgba(0,0,0,.4);line-height:1.9;
+    background:rgba(8,50,82,.58);border:1px solid rgba(150,220,255,.30);
+    border-radius:20px;padding:20px 26px;max-width:620px;
+    box-shadow:0 12px 40px rgba(0,20,40,.35);line-height:1.9;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
   }
-  .card h3{font-size:22px;margin-bottom:10px;color:#7fd7ff;letter-spacing:3px}
-  .card .keys{display:inline-block;min-width:26px;padding:1px 8px;margin:0 2px;border-radius:6px;
-    background:#123a5c;border:1px solid #2a6fa8;font-weight:700;color:#cfeaff}
+  .card h3{font-size:21px;margin-bottom:8px;color:#8fe4ff;letter-spacing:3px}
+  .card .keys{display:inline-block;min-width:26px;padding:1px 9px;margin:0 2px;border-radius:8px;
+    background:rgba(28,120,180,.45);border:1px solid rgba(140,215,255,.4);font-weight:700;color:#dff4ff}
   .row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
-  .hint{font-size:14px;color:#9fd0f0}
-  .muted{font-size:13px;color:#6f9cc0}
+  .hint{font-size:13px;color:#bfe9f7}
+  .muted{font-size:13px;color:#cfeaf7;text-shadow:0 1px 4px rgba(0,28,50,.55)}
   .fish-legend{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:6px}
-  .fish-legend .dot{display:flex;align-items:center;gap:6px;font-size:13px;color:#cfeaff;background:rgba(10,40,70,.6);padding:4px 10px;border-radius:20px}
+  .fish-legend .dot{display:flex;align-items:center;gap:6px;font-size:13px;color:#dff4ff;background:rgba(20,80,120,.55);padding:4px 12px;border-radius:20px}
   .fish-legend .dot i{width:14px;height:14px;border-radius:50%;display:inline-block;box-shadow:0 0 8px currentColor}
-  .btn:disabled{opacity:.42;cursor:not-allowed;transform:none;box-shadow:none;filter:grayscale(.45)}
-  .btn-mini{min-width:0;padding:8px 18px;font-size:15px;letter-spacing:1px}
-  .select-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:800px;margin:0 auto}
-  .fish-card{position:relative;width:136px;background:rgba(4,24,48,.72);border:2px solid rgba(120,200,255,.22);
-    border-radius:14px;padding:10px 8px 9px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;
-    transition:border-color .15s,box-shadow .15s,transform .12s}
-  .fish-card:hover{transform:translateY(-3px);border-color:rgba(170,225,255,.55)}
+
+  .select-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:820px;margin:0 auto}
+  .fish-card{position:relative;width:140px;background:rgba(8,50,82,.6);border:2px solid rgba(150,220,255,.28);
+    border-radius:18px;padding:12px 8px 10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;
+    -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);box-shadow:0 6px 18px rgba(0,20,40,.28);
+    transition:border-color .18s,box-shadow .18s,transform .14s}
+  .fish-card:hover{transform:translateY(-4px);border-color:rgba(180,235,255,.6)}
+  .fish-card:active{transform:scale(.96)}
   .fish-card canvas{width:120px;height:88px;display:block;pointer-events:none}
-  .fish-card .name{font-size:14px;font-weight:700;color:#eaf6ff}
-  .fish-card .tag{font-size:11px;color:#7fb8e0}
+  .fish-card .name{font-size:14px;font-weight:700;color:#f2fbff}
+  .fish-card .tag{font-size:11px;color:#a9d8ee}
   .fish-card .badge{position:absolute;top:-9px;right:-7px;font-size:11px;font-weight:800;padding:1px 8px;border-radius:10px;
-    background:#0b2c50;color:#ffd23f;border:1px solid rgba(255,210,63,.55);box-shadow:0 2px 6px rgba(0,0,0,.4);min-width:26px;text-align:center}
+    background:rgba(10,60,95,.9);color:#ffd23f;border:1px solid rgba(255,210,63,.6);box-shadow:0 2px 8px rgba(0,0,0,.35);min-width:26px;text-align:center}
   .fish-card .badge:empty{display:none}
-  .fish-card.p1{border-color:#ffd23f;box-shadow:0 0 16px rgba(255,210,63,.55)}
-  .fish-card.p2{border-color:#24c26d;box-shadow:0 0 16px rgba(36,194,109,.55)}
-  #selectPlayers .btn.active{background:linear-gradient(135deg,#1aa5ff,#0066d6);box-shadow:0 4px 14px rgba(0,140,255,.5)}
-  #select{overflow-y:auto;padding:20px}
+  .fish-card.p1{border-color:#ffd23f;box-shadow:0 0 0 2px rgba(255,210,63,.35), 0 0 22px rgba(255,210,63,.6)}
+  .fish-card.p2{border-color:#24c26d;box-shadow:0 0 0 2px rgba(36,194,109,.35), 0 0 22px rgba(36,194,109,.6)}
+  #selectPlayers .btn.active{background:linear-gradient(135deg,#35c0ff,#0a86e8);box-shadow:0 6px 16px rgba(0,150,255,.5)}
+  #select{overflow-y:auto;padding:18px}
+
+  @media (max-width:480px){
+    h1.title{letter-spacing:2px}
+    .subtitle{font-size:13px}
+    .btn{min-width:200px;padding:13px 24px;font-size:18px}
+    .card{max-width:92%;padding:16px 18px}
+    .fish-card{width:104px;padding:9px 6px 8px;gap:3px}
+    .fish-card canvas{width:88px;height:64px}
+    .fish-card .name{font-size:12px}
+    .overlay{gap:12px}
+  }
 </style>
 </head>
 <body>
@@ -266,11 +283,18 @@ function spawnParticles(x, y, color, n, spread = 3, life = 0.5, size = 3) {
 const bubbles = [];
 function initBubbles() {
   bubbles.length = 0;
-  for (let i = 0; i < 40; i++) {
-    bubbles.push({ x: rand(0, W), y: rand(0, H), r: rand(1.5, 6), sp: rand(20, 60), drift: rand(-6, 6) });
+  for (let i = 0; i < 44; i++) {
+    bubbles.push({ x: rand(0, W), y: rand(0, H), r: rand(1.5, 7), sp: rand(18, 60), drift: rand(-8, 8), ph: rand(0, TAU) });
   }
 }
 initBubbles();
+
+// 吃掉小鱼时喷出一串上升的气泡（泡泡粒子特效）
+function spawnBubbleBurst(x, y) {
+  for (let i = 0; i < 10; i++) {
+    bubbles.push({ x: x + rand(-14, 14), y: y + rand(-8, 8), r: rand(1.5, 5), sp: rand(50, 110), drift: rand(-18, 18), ph: rand(0, TAU) });
+  }
+}
 
 /* ---------- 鱼实体 ---------- */
 let fishId = 0;
@@ -294,6 +318,7 @@ class Fish {
     this.combo = 0; this.comboTime = 0;
     this.kills = 0;
     this.hueShift = rand(-8, 8);
+    this.trail = [];
   }
 
   update(dt) {
@@ -302,6 +327,8 @@ class Fish {
     if (this.dashCooldown > 0) this.dashCooldown -= dt;
     if (this.invincibleUntil > 0) this.invincibleUntil -= dt;
     if (this.comboTime > 0) { this.comboTime -= dt; if (this.comboTime <= 0) this.combo = 0; }
+    this.trail.push({ x: this.x, y: this.y });
+    if (this.trail.length > 8) this.trail.shift();
   }
 
   aiSpeed() {
@@ -567,7 +594,6 @@ const Game = {
 
     this.handleEating();
     this.updateParticles(dt);
-    this.updateBubbles(dt);
     this.maintainPopulation();
   },
 
@@ -613,6 +639,7 @@ const Game = {
     p.comboTime = 2.2;
     p.size = Math.min(150, p.size + f.size * 0.045);
     this.removeFish(f);
+    spawnBubbleBurst(f.x, f.y);
     spawnParticles(f.x, f.y, f.species.c2, 10, 0.6, 0.5, 3);
     spawnParticles(f.x, f.y, '#ffffff', 4, 0.4, 0.3, 2);
     AudioSys.eat(p.size);
@@ -657,7 +684,7 @@ const Game = {
   updateBubbles(dt) {
     for (const b of bubbles) {
       b.y -= b.sp * dt;
-      b.x += b.drift * dt;
+      b.x += (b.drift + Math.sin(ambientT * 2 + b.ph) * 14) * dt;
       if (b.y < -20) { b.y = H + 20; b.x = rand(0, W); }
       if (b.x < -20) b.x = W + 20;
       if (b.x > W + 20) b.x = -20;
@@ -1029,23 +1056,124 @@ function clipBodyShape(sp, bodyL, bodyH) {
   ctx.clip();
 }
 
+/* ---- 海底氛围元素：海草 / 珊瑚 / 气泡 / 拖尾 ---- */
+const corals = [
+  { fx: 0.10, fy: 0.93, s: 0.05, c: 'rgba(42,150,158,.26)' },
+  { fx: 0.34, fy: 0.96, s: 0.04, c: 'rgba(36,140,150,.22)' },
+  { fx: 0.66, fy: 0.94, s: 0.045, c: 'rgba(40,148,155,.24)' },
+  { fx: 0.86, fy: 0.95, s: 0.05, c: 'rgba(44,152,160,.26)' },
+];
+const seaweed = [];
+(function initSeaweed() {
+  for (let i = 0; i < 16; i++) {
+    seaweed.push({
+      fx: (i + 0.5) / 16 + rand(-0.015, 0.015),
+      hf: rand(0.12, 0.3),
+      ph: rand(0, TAU),
+      front: i % 2 === 1,
+      w: rand(6, 14),
+    });
+  }
+})();
+
+function drawDistantReef() {
+  const mounds = [
+    { fx: 0.05, w: 0.30, h: 0.12, c: 'rgba(20,100,135,.30)' },
+    { fx: 0.48, w: 0.34, h: 0.16, c: 'rgba(16,88,122,.26)' },
+    { fx: 0.90, w: 0.28, h: 0.11, c: 'rgba(22,104,140,.28)' },
+  ];
+  for (const m of mounds) {
+    const x = m.fx * W, y = H;
+    const r = m.w * W;
+    const grad = ctx.createRadialGradient(x, y, r * 0.1, x, y, r);
+    grad.addColorStop(0, m.c);
+    grad.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(x - r, y - m.h * H * 2, r * 2, m.h * H * 2);
+  }
+  // 珊瑚丛（远景模糊感）
+  for (const c of corals) {
+    const x = c.fx * W, y = c.fy * H, s = c.s * Math.min(W, H);
+    ctx.fillStyle = c.c;
+    for (let i = -2; i <= 2; i++) {
+      const ang = -Math.PI / 2 + i * 0.42;
+      const r = s * (1.15 - Math.abs(i) * 0.2);
+      ctx.beginPath();
+      ctx.arc(x + Math.cos(ang) * r * 0.55, y - Math.sin(ang) * r * 0.35, r * 0.55, 0, TAU);
+      ctx.fill();
+    }
+  }
+}
+
+function drawBlade(x, baseY, len, sway, width, color) {
+  ctx.fillStyle = color;
+  const tipX = x + sway, tipY = baseY - len, cy = baseY - len * 0.55;
+  ctx.beginPath();
+  ctx.moveTo(x - width * 0.5, baseY);
+  ctx.quadraticCurveTo(x - width * 0.5 + sway * 0.4, cy, tipX, tipY);
+  ctx.quadraticCurveTo(x + width * 0.5 + sway * 0.4, cy, x + width * 0.5, baseY);
+  ctx.closePath();
+  ctx.fill();
+}
+
+function drawSeaweed(layer) {
+  for (const s of seaweed) {
+    const isFront = layer === 'front';
+    if (s.front !== isFront) continue;
+    const x = s.fx * W, baseY = H, len = s.hf * H;
+    const t = ambientT * 0.8 + s.ph;
+    const sway = Math.sin(t) * len * 0.16;
+    if (isFront) {
+      drawBlade(x, baseY, len, sway, s.w, 'rgba(20,118,128,.82)');
+      drawBlade(x, baseY, len * 0.7, sway * 0.7, s.w * 0.68, 'rgba(26,150,148,.72)');
+      drawBlade(x + s.w * 0.6, baseY, len * 0.5, -sway * 0.6, s.w * 0.58, 'rgba(16,102,116,.8)');
+    } else {
+      drawBlade(x, baseY, len * 0.82, sway, s.w * 0.9, 'rgba(80,196,196,.30)');
+    }
+  }
+}
+
+function drawBubbles() {
+  for (const b of bubbles) {
+    ctx.fillStyle = 'rgba(255,255,255,.14)';
+    ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, TAU); ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,.42)';
+    ctx.lineWidth = 1; ctx.stroke();
+    ctx.fillStyle = 'rgba(255,255,255,.6)';
+    ctx.beginPath(); ctx.arc(b.x - b.r * 0.32, b.y - b.r * 0.32, b.r * 0.3, 0, TAU); ctx.fill();
+  }
+}
+
+function drawTrail(f) {
+  const tr = f.trail;
+  if (!tr || tr.length < 2) return;
+  for (let i = 0; i < tr.length; i++) {
+    const p = tr[i], k = i / tr.length;
+    ctx.globalAlpha = k * k * 0.2;
+    ctx.fillStyle = f.species.c1;
+    ctx.beginPath(); ctx.arc(p.x, p.y, f.size * 0.45 * k, 0, TAU); ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+}
+
 function drawBackground() {
-  // 水体渐变（上部更亮，向下渐深）
+  // 明亮清新水体渐变（上部浅，向下渐深，非纯色单调）
   const g = ctx.createLinearGradient(0, 0, 0, H);
-  g.addColorStop(0, '#0e5a9c');
-  g.addColorStop(0.35, '#0a4478');
-  g.addColorStop(0.75, '#072f57');
-  g.addColorStop(1, '#041c38');
+  g.addColorStop(0, '#6fd4f0');
+  g.addColorStop(0.28, '#3fb6de');
+  g.addColorStop(0.6, '#1a92c6');
+  g.addColorStop(0.85, '#0f6ea3');
+  g.addColorStop(1, '#0a5a8c');
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, W, H);
 
-  // 阳光光束
+  // 阳光光束（缓缓移动）
   ctx.save();
-  ctx.globalAlpha = 0.10;
+  ctx.globalAlpha = 0.12;
   for (let i = 0; i < 5; i++) {
-    const lx = ((i * 0.23 + 0.12) * W + Game.time * 8) % (W * 1.4) - W * 0.2;
+    const lx = ((i * 0.23 + 0.12) * W + ambientT * 12) % (W * 1.4) - W * 0.2;
     const grad = ctx.createLinearGradient(lx - 50, 0, lx + 50, H * 0.9);
-    grad.addColorStop(0, '#bfe9ff'); grad.addColorStop(1, 'transparent');
+    grad.addColorStop(0, '#eafcff'); grad.addColorStop(1, 'transparent');
     ctx.fillStyle = grad;
     ctx.beginPath();
     ctx.moveTo(lx, 0); ctx.lineTo(lx + 130, 0); ctx.lineTo(lx + 40, H * 0.85); ctx.lineTo(lx - 90, H * 0.85);
@@ -1053,30 +1181,19 @@ function drawBackground() {
   }
   ctx.restore();
 
-  // 暗角（聚焦中心）
-  const v = ctx.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.35, W / 2, H / 2, Math.max(W, H) * 0.75);
-  v.addColorStop(0, 'rgba(0,0,0,0)');
-  v.addColorStop(1, 'rgba(0,6,18,.5)');
-  ctx.fillStyle = v;
-  ctx.fillRect(0, 0, W, H);
+  // 远处礁石珊瑚 + 远处海草（景深）
+  drawDistantReef();
+  drawSeaweed('back');
 }
 
 function drawScene() {
-  // 气泡（带高光）
-  for (const b of bubbles) {
-    ctx.fillStyle = 'rgba(255,255,255,.12)';
-    ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, TAU); ctx.fill();
-    ctx.strokeStyle = 'rgba(255,255,255,.35)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-    ctx.fillStyle = 'rgba(255,255,255,.5)';
-    ctx.beginPath(); ctx.arc(b.x - b.r * 0.3, b.y - b.r * 0.3, b.r * 0.28, 0, TAU); ctx.fill();
-  }
-
-  // 鱼（小的在下层）
+  // 鱼（小的在下层，带拖尾）
   const drawList = [...Game.fishes.filter(f => f.alive), ...Game.players.filter(p => p.alive)];
   drawList.sort((a, b) => a.size - b.size);
-  for (const f of drawList) drawFishBody(f, Game.time);
+  for (const f of drawList) {
+    drawTrail(f);
+    drawFishBody(f, Game.time);
+  }
 
   // 粒子
   for (const pt of particles) {
@@ -1085,6 +1202,9 @@ function drawScene() {
     ctx.beginPath(); ctx.arc(pt.x, pt.y, pt.size, 0, TAU); ctx.fill();
   }
   ctx.globalAlpha = 1;
+
+  // 前景海草（深色，在鱼前面，营造层次）
+  drawSeaweed('front');
 }
 
 function drawHUD() {
@@ -1100,8 +1220,10 @@ function drawHUD() {
     // 合作模式：显示两人总分
     const total = Math.floor(players[0].score + (players[1] ? players[1].score : 0));
     ctx.save();
-    ctx.fillStyle = 'rgba(3,20,40,.55)';
-    roundRect(W / 2 - 90, pad, 180, 42, 12); ctx.fill();
+    ctx.fillStyle = 'rgba(10,55,90,.5)';
+    roundRect(W / 2 - 90, pad, 180, 42, 14); ctx.fill();
+    ctx.strokeStyle = 'rgba(150,220,255,.28)'; ctx.lineWidth = 1.5;
+    roundRect(W / 2 - 90, pad, 180, 42, 14); ctx.stroke();
     ctx.fillStyle = '#ffd23f';
     ctx.font = 'bold 22px "Microsoft YaHei"';
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
@@ -1151,8 +1273,10 @@ function drawHUD() {
 function drawPlayerHUD(p, x, y, color, showScore) {
   ctx.save();
   ctx.textBaseline = 'top';
-  ctx.fillStyle = 'rgba(3,20,40,.55)';
-  roundRect(x, y, 220, 74, 12); ctx.fill();
+  ctx.fillStyle = 'rgba(10,55,90,.5)';
+  roundRect(x, y, 220, 74, 14); ctx.fill();
+  ctx.strokeStyle = 'rgba(150,220,255,.28)'; ctx.lineWidth = 1.5;
+  roundRect(x, y, 220, 74, 14); ctx.stroke();
 
   const nameColor = color || '#7fd7ff';
   ctx.font = 'bold 18px "Microsoft YaHei"';
@@ -1207,11 +1331,16 @@ function roundRect(x, y, w, h, r) {
    主循环
    ============================================================ */
 let lastT = performance.now();
+let ambientT = 0;
 function loop(now) {
   const dt = (now - lastT) / 1000;
   lastT = now;
+  const adt = Math.min(dt, 0.05);
+  ambientT += adt;
+  Game.updateBubbles(adt);
 
   drawBackground();
+  drawBubbles();
   if (Game.state === 'play' || Game.state === 'pause') {
     if (Game.state === 'play') Game.update(dt);
     drawScene();
@@ -1232,6 +1361,24 @@ document.getElementById('btnConfirm').addEventListener('click', () => Game.confi
 document.getElementById('btnSelectBack').addEventListener('click', () => Game.toMenu());
 document.getElementById('btnPickP1').addEventListener('click', () => Game.setSelectPlayer(0));
 document.getElementById('btnPickP2').addEventListener('click', () => Game.setSelectPlayer(1));
+
+/* ---------- 按钮水波纹点击反馈 ---------- */
+function attachRipple() {
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('pointerdown', e => {
+      const rect = btn.getBoundingClientRect();
+      const d = Math.max(rect.width, rect.height);
+      const span = document.createElement('span');
+      span.className = 'ripple';
+      span.style.width = span.style.height = d + 'px';
+      span.style.left = (e.clientX - rect.left - d / 2) + 'px';
+      span.style.top = (e.clientY - rect.top - d / 2) + 'px';
+      btn.appendChild(span);
+      setTimeout(() => span.remove(), 620);
+    });
+  });
+}
+attachRipple();
 
 /* ---------- 启动 ---------- */
 Game.init();
