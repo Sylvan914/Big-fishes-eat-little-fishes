@@ -74,6 +74,130 @@
   .fish-card.p2{border-color:#24c26d;box-shadow:0 0 0 2px rgba(36,194,109,.35), 0 0 22px rgba(36,194,109,.6)}
   #selectPlayers .btn.active{background:linear-gradient(135deg,#35c0ff,#0a86e8);box-shadow:0 6px 16px rgba(0,150,255,.5)}
   #select{overflow-y:auto;padding:18px}
+  #album{overflow-y:auto;padding:18px}
+  .fish-card.locked{filter:grayscale(1) opacity(.5);cursor:not-allowed;border-color:rgba(150,170,190,.18)}
+  .fish-card.locked:hover{transform:none;border-color:rgba(150,170,190,.18)}
+  .toast{
+    position:absolute;left:50%;bottom:14%;transform:translateX(-50%) translateY(20px);
+    background:rgba(10,60,95,.94);color:#fff;padding:12px 24px;border-radius:999px;font-size:15px;font-weight:700;
+    border:1px solid rgba(255,210,63,.65);box-shadow:0 8px 24px rgba(0,0,0,.45);opacity:0;pointer-events:none;z-index:30;
+    transition:opacity .3s ease, transform .3s ease;white-space:nowrap;max-width:92%;text-align:center;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  /* ---- 主页 / 背包 / DIY 面板 ---- */
+  #home,#backpack,#diy{overflow-y:auto;padding:18px}
+  #home{background:radial-gradient(ellipse at 50% 28%, rgba(44,168,218,.32), rgba(4,30,60,.74));overflow-y:auto}
+  .home-deco{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:-1}
+  .home-float{position:absolute;width:30px;height:18px;border-radius:50%;opacity:.55;
+    background:radial-gradient(circle at 38% 42%, #cff2ff, #34a6d8 72%);
+    box-shadow:0 0 14px rgba(120,220,255,.5)}
+  .home-float::before{content:'';position:absolute;left:-9px;top:3px;width:0;height:0;
+    border-right:11px solid #34a6d8;border-top:6px solid transparent;border-bottom:6px solid transparent}
+  .home-float.f1{top:13%;left:-6%;animation:swim 19s linear infinite}
+  .home-float.f2{top:34%;right:-6%;width:24px;height:15px;animation:swim 24s linear infinite reverse}
+  .home-float.f3{top:60%;left:-8%;width:20px;height:13px;animation:swim 28s linear infinite}
+  @keyframes swim{0%{transform:translateX(-6vw) translateY(0)}50%{transform:translateX(50vw) translateY(-18px)}100%{transform:translateX(108vw) translateY(10px)}}
+  .home-top{display:flex;gap:10px;justify-content:center;z-index:2}
+  .home-char{display:flex;flex-direction:column;align-items:center;gap:10px;z-index:2}
+  .home-char canvas{width:200px;height:146px;border-radius:20px;background:rgba(12,70,110,.5);
+    border:1px solid rgba(150,220,255,.35);box-shadow:0 0 26px rgba(0,180,255,.35), inset 0 0 30px rgba(0,120,190,.3)}
+  .home-nick{cursor:pointer;border:none;font-size:17px;font-weight:800;letter-spacing:1px;color:#fff;
+    padding:8px 22px;border-radius:999px;background:linear-gradient(135deg,rgba(53,192,255,.9),rgba(10,134,232,.9));
+    box-shadow:0 6px 16px rgba(0,150,255,.4), inset 0 2px 0 rgba(255,255,255,.35)}
+  .home-nick::after{content:'✎';margin-left:8px;font-size:13px;opacity:.85}
+  .start-big{min-width:min(340px,84vw);padding:20px 40px;font-size:26px;letter-spacing:6px;
+    background:linear-gradient(135deg,#4ad0ff,#0a86e8 60%,#6b3aff);
+    box-shadow:0 12px 34px rgba(0,160,255,.6), inset 0 3px 0 rgba(255,255,255,.4), inset 0 -4px 0 rgba(0,30,90,.2);
+    animation:pulse 2.4s ease-in-out infinite;z-index:2}
+  @keyframes pulse{0%,100%{box-shadow:0 12px 34px rgba(0,160,255,.6), inset 0 3px 0 rgba(255,255,255,.4), inset 0 -4px 0 rgba(0,30,90,.2)}50%{box-shadow:0 12px 46px rgba(120,80,255,.85), inset 0 3px 0 rgba(255,255,255,.45), inset 0 -4px 0 rgba(0,30,90,.2)}}
+  .home-stats{margin-top:2px;font-size:14px;color:#bfe9f7;background:rgba(8,50,82,.5);padding:8px 18px;border-radius:999px;border:1px solid rgba(150,220,255,.25);z-index:2}
+  /* ---- 主页大厅布局 ---- */
+  #home{gap:10px}
+  .home-top{display:flex;gap:8px;justify-content:center;z-index:2;flex-wrap:wrap}
+  .icon-btn{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+    width:62px;height:62px;border-radius:18px;border:none;cursor:pointer;color:#eaf6ff;
+    background:linear-gradient(160deg,rgba(60,170,220,.4),rgba(10,70,120,.5));
+    box-shadow:inset 0 0 0 1.5px rgba(150,220,255,.4), 0 6px 16px rgba(0,20,40,.35);
+    transition:transform .14s, box-shadow .14s}
+  .icon-btn:hover{transform:translateY(-3px);box-shadow:inset 0 0 0 1.5px rgba(180,235,255,.65), 0 10px 22px rgba(0,140,220,.5)}
+  .icon-btn:active{transform:scale(.94)}
+  .icon-btn .ic{font-size:15px;font-weight:800;letter-spacing:1px;color:#fff;text-shadow:0 1px 3px rgba(0,20,40,.6)}
+  .icon-btn .lb{font-size:10px;color:#bfe9f7;letter-spacing:1px}
+  .icon-btn.gold{background:linear-gradient(160deg,rgba(255,190,60,.42),rgba(120,70,10,.55));box-shadow:inset 0 0 0 1.5px rgba(255,210,63,.65), 0 6px 16px rgba(120,70,10,.4)}
+  .home-main{display:flex;align-items:center;justify-content:center;gap:16px;z-index:2;width:100%;max-width:620px}
+  .home-left{display:flex;flex-direction:column;align-items:center;gap:8px;flex:0 0 auto}
+  .home-right{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1}
+  .home-char canvas{width:188px;height:138px;border-radius:20px;background:rgba(12,70,110,.5);
+    border:1px solid rgba(150,220,255,.35);box-shadow:0 0 26px rgba(0,180,255,.35), inset 0 0 30px rgba(0,120,190,.3)}
+  .lv-chip{font-size:13px;font-weight:800;color:#ffd23f;background:rgba(60,40,5,.55);padding:4px 14px;border-radius:999px;
+    border:1px solid rgba(255,210,63,.5);letter-spacing:1px;text-shadow:0 0 8px rgba(255,210,63,.6)}
+  .home-foot{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;z-index:2;width:100%;max-width:620px}
+  .foot-item{font-size:12px;color:#bfe9f7;background:rgba(8,50,82,.5);padding:6px 14px;border-radius:999px;
+    border:1px solid rgba(150,220,255,.25);letter-spacing:.5px}
+  .home-beam{position:absolute;top:-10%;width:120px;height:160%;opacity:.5;filter:blur(2px);pointer-events:none;
+    background:linear-gradient(180deg,rgba(120,220,255,0),rgba(120,220,255,.16),rgba(120,220,255,0));
+    transform:rotate(18deg);animation:beam 7s ease-in-out infinite}
+  .home-beam.b1{left:18%}
+  .home-beam.b2{left:64%;animation-delay:2.6s}
+  @keyframes beam{0%,100%{transform:rotate(18deg) translateY(-6%)}50%{transform:rotate(18deg) translateY(6%)}}
+  .start-big{min-width:min(250px,46vw);padding:22px 30px;font-size:24px;letter-spacing:5px}
+  /* ---- 金色占位面板 ---- */
+  .panel.gold{border:2px solid rgba(255,210,63,.65);box-shadow:0 0 30px rgba(255,190,60,.35), 0 12px 40px rgba(0,20,40,.4);
+    background:linear-gradient(160deg,rgba(60,48,10,.55),rgba(8,50,82,.6))}
+  .panel-desc{font-size:13px;color:#ffe9b0;line-height:1.9;background:rgba(120,80,10,.18);border-radius:12px;padding:12px 16px;border:1px solid rgba(255,210,63,.25)}
+  /* ---- VIP 锁定态封印角标 ---- */
+  .seal{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;
+    background:radial-gradient(circle at 40% 35%,#ffd23f,#c77700);color:#5a2d00;font-weight:900;font-size:20px;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(255,190,60,.85), inset 0 2px 0 rgba(255,255,255,.5);
+    text-shadow:0 1px 0 rgba(255,255,255,.4);z-index:2;pointer-events:none}
+  .fish-card.vip.locked{filter:none;border-color:rgba(255,190,60,.35)}
+  .fish-card.vip.locked:hover{transform:none;border-color:rgba(255,190,60,.35)}
+  .fish-card.vip.locked canvas{filter:brightness(0) opacity(.6)}
+  .nick-input{width:min(320px,86vw);padding:14px 20px;border-radius:999px;border:1px solid rgba(150,220,255,.35);
+    background:rgba(8,50,82,.6);color:#eaf6ff;font-size:18px;text-align:center;outline:none}
+  .nick-input::placeholder{color:#8fb8cc}
+  .fish-card.vip{border-color:rgba(255,200,80,.65);box-shadow:0 0 20px rgba(255,190,60,.45), inset 0 0 18px rgba(255,190,60,.12)}
+  .fish-card.vip .tag{color:#ffd23f;font-weight:800}
+  .frag-card.vip{border-color:rgba(255,200,80,.55);box-shadow:0 0 14px rgba(255,190,60,.3)}
+  .frag-card.vip .nm{color:#ffd23f}
+  .panel{background:rgba(8,50,82,.58);border:1px solid rgba(150,220,255,.3);border-radius:20px;padding:16px 18px;
+    width:min(560px,94vw);display:flex;flex-direction:column;gap:10px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+    box-shadow:0 12px 40px rgba(0,20,40,.35)}
+  .tabs{display:flex;gap:8px;justify-content:center}
+  .chip{padding:8px 18px;border-radius:999px;font-size:14px;font-weight:700;color:#dff4ff;background:rgba(255,255,255,.08);
+    border:1px solid rgba(150,220,255,.28);cursor:pointer;transition:all .15s}
+  .chip.active{background:linear-gradient(135deg,#35c0ff,#0a86e8);color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(0,150,255,.45)}
+  .prog{width:100%;height:8px;border-radius:999px;background:rgba(255,255,255,.14);overflow:hidden}
+  .prog-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#3ee08a,#35c0ff);transition:width .3s ease}
+  .swatches{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .swatch{width:34px;height:34px;border-radius:12px;border:2px solid rgba(255,255,255,.3);cursor:pointer;transition:all .14s}
+  .swatch.active{border-color:#ffd23f;box-shadow:0 0 0 2px rgba(255,210,63,.4), 0 0 14px rgba(255,210,63,.6)}
+  .opt-group{display:flex;flex-direction:column;gap:6px;align-items:center}
+  .opt-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center}
+  .opt-lbl{font-size:13px;color:#a9d8ee}
+  .opt-btn{padding:6px 14px;border-radius:999px;font-size:13px;font-weight:700;color:#dff4ff;background:rgba(255,255,255,.08);
+    border:1px solid rgba(150,220,255,.28);cursor:pointer;transition:all .14s}
+  .opt-btn.active{background:linear-gradient(135deg,#35c0ff,#0a86e8);color:#fff;border-color:transparent}
+  .diy-name{width:min(320px,86vw);padding:12px 18px;border-radius:999px;border:1px solid rgba(150,220,255,.35);
+    background:rgba(8,50,82,.6);color:#eaf6ff;font-size:16px;text-align:center;outline:none}
+  .diy-name::placeholder{color:#8fb8cc}
+  .diy-preview{width:200px;height:146px;border-radius:16px;background:rgba(20,90,130,.4);border:1px solid rgba(150,220,255,.3)}
+  .diy-list{display:flex;flex-direction:column;gap:8px;width:min(420px,90vw);max-height:38vh;overflow-y:auto}
+  .diy-item{display:flex;align-items:center;gap:10px;background:rgba(8,50,82,.6);border:1px solid rgba(150,220,255,.28);border-radius:14px;padding:8px 12px}
+  .diy-item canvas{width:64px;height:48px;border-radius:8px}
+  .diy-item .nm{flex:1;text-align:left;font-size:14px;font-weight:700;color:#f2fbff}
+  .frag-grid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:820px}
+  .frag-card{width:132px;background:rgba(8,50,82,.6);border:1px solid rgba(150,220,255,.28);border-radius:14px;padding:10px 8px;
+    display:flex;flex-direction:column;align-items:center;gap:6px}
+  .frag-card .nm{font-size:13px;font-weight:700;color:#f2fbff}
+  .frag-card .cnt{font-size:12px;color:#ffd23f;font-weight:800}
+  .frag-log{display:flex;flex-direction:column;gap:4px;width:min(420px,90vw);max-height:30vh;overflow-y:auto;font-size:13px;color:#cfeaf7;text-align:left}
+  .frag-log .entry{background:rgba(8,50,82,.45);border-radius:8px;padding:4px 10px}
+  @media (max-width:480px){
+    .frag-card{width:104px}
+    .diy-item canvas{width:52px;height:40px}
+  }
 
   @media (max-width:480px){
     h1.title{letter-spacing:2px}
@@ -89,14 +213,18 @@
 </head>
 <body>
 <canvas id="game"></canvas>
+<div id="toast" class="toast"></div>
 
 <!-- 主菜单 -->
-<div class="overlay" id="menu">
+<div class="overlay hidden" id="menu">
   <h1 class="title">大鱼吃小鱼</h1>
   <div class="subtitle">吃掉小鱼 · 躲避大鱼 · 成长为海洋之王</div>
   <div class="row" style="margin-top:8px">
     <button class="btn" id="btnSingle">单人模式</button>
     <button class="btn secondary" id="btnDouble">双人模式</button>
+  </div>
+  <div class="row" style="margin-top:8px">
+    <button class="btn ghost btn-mini" id="btnAlbum">皮肤图鉴</button>
   </div>
   <div class="card">
     <h3>操作说明</h3>
@@ -144,6 +272,148 @@
   <div class="row" style="margin-top:8px">
     <button class="btn" id="btnConfirm">开始游戏</button>
     <button class="btn ghost" id="btnSelectBack">返回菜单</button>
+  </div>
+</div>
+
+<!-- 皮肤图鉴 -->
+<div class="overlay hidden" id="album">
+  <h1 class="title" style="font-size:40px">皮肤图鉴</h1>
+  <div class="subtitle" id="albumSubtitle"></div>
+  <div class="tabs">
+    <button class="chip active" id="tabOfficial">官方鱼种</button>
+    <button class="chip" id="tabDiy">我的DIY</button>
+  </div>
+  <div class="select-grid" id="albumGrid"></div>
+  <div class="row" style="margin-top:8px">
+    <button class="btn ghost" id="btnAlbumClose">返回主页</button>
+  </div>
+</div>
+
+<!-- 主页（手游大厅：顶部图标组 + 左角色 + 右开始 + 底部信息栏） -->
+<div class="overlay" id="home">
+  <div class="home-deco">
+    <span class="home-float f1"></span>
+    <span class="home-float f2"></span>
+    <span class="home-float f3"></span>
+    <i class="home-beam b1"></i>
+    <i class="home-beam b2"></i>
+  </div>
+
+  <h1 class="title">大鱼吃小鱼</h1>
+  <div class="subtitle">吃掉小鱼 · 躲避大鱼 · 成长为海洋之王</div>
+
+  <div class="home-top">
+    <button class="icon-btn" id="btnBackpack"><span class="ic">背包</span><span class="lb">背包</span></button>
+    <button class="icon-btn" id="btnAlbumHome"><span class="ic">图鉴</span><span class="lb">图鉴</span></button>
+    <button class="icon-btn" id="btnDiy"><span class="ic">DIY</span><span class="lb">DIY</span></button>
+    <button class="icon-btn gold" id="btnVipShop"><span class="ic">VIP</span><span class="lb">商城</span></button>
+    <button class="icon-btn" id="btnQuest"><span class="ic">任务</span><span class="lb">任务</span></button>
+    <button class="icon-btn" id="btnMail"><span class="ic">邮件</span><span class="lb">邮件</span></button>
+  </div>
+
+  <div class="home-main">
+    <div class="home-left">
+      <div class="home-char">
+        <canvas id="homeChar" width="240" height="176"></canvas>
+      </div>
+      <button class="home-nick" id="homeNick">未命名小鱼</button>
+      <div class="lv-chip" id="homeLv">Lv.1 · 新手鱼苗</div>
+    </div>
+    <div class="home-right">
+      <button class="btn start-big" id="btnStart">开始游戏</button>
+    </div>
+  </div>
+
+  <div class="home-foot">
+    <div class="foot-item" id="homeFishName">出战：蓝色小鱼</div>
+    <div class="foot-item" id="homeFrag">碎片 --</div>
+    <div class="foot-item" id="homeStats">累计吞噬 0 条</div>
+  </div>
+</div>
+
+<!-- VIP 商城（占位面板） -->
+<div class="overlay hidden" id="vipshop">
+  <div class="panel gold">
+    <h1 class="title" style="font-size:38px">VIP 商城</h1>
+    <div class="subtitle">兑换稀有高阶鱼种 · 敬请期待</div>
+    <p class="panel-desc">这里将上架龙形海兽、机械鲨鱼、星空水母等传说鱼种的碎片礼包与专属道具。</p>
+    <div class="row">
+      <button class="btn ghost" id="btnVipShopBack">返回</button>
+    </div>
+  </div>
+</div>
+
+<!-- 任务（占位面板） -->
+<div class="overlay hidden" id="quest">
+  <div class="panel gold">
+    <h1 class="title" style="font-size:38px">任务</h1>
+    <div class="subtitle">完成每日任务领碎片 · 敬请期待</div>
+    <p class="panel-desc">每日吞噬、连击、解锁等任务将在这里派发奖励。</p>
+    <div class="row">
+      <button class="btn ghost" id="btnQuestBack">返回</button>
+    </div>
+  </div>
+</div>
+
+<!-- 邮件（占位面板） -->
+<div class="overlay hidden" id="mail">
+  <div class="panel gold">
+    <h1 class="title" style="font-size:38px">邮件</h1>
+    <div class="subtitle">系统奖励与通知 · 敬请期待</div>
+    <p class="panel-desc">活动奖励、补偿与公告将通过邮件送达。</p>
+    <div class="row">
+      <button class="btn ghost" id="btnMailBack">返回</button>
+    </div>
+  </div>
+</div>
+
+<!-- 玩家昵称设置 -->
+<div class="overlay hidden" id="nickname">
+  <h1 class="title" style="font-size:44px">设置昵称</h1>
+  <div class="subtitle">给海洋之王起个响亮的名字</div>
+  <input class="nick-input" id="nickInput" maxlength="12" placeholder="输入你的昵称">
+  <div class="row" style="margin-top:6px">
+    <button class="btn" id="btnNickSave">保存</button>
+    <button class="btn ghost" id="btnNickBack">返回</button>
+  </div>
+</div>
+
+<!-- 碎片背包 -->
+<div class="overlay hidden" id="backpack">
+  <h1 class="title" style="font-size:40px">鱼背包</h1>
+  <div class="subtitle" id="backpackSubtitle"></div>
+  <div class="frag-grid" id="backpackGrid"></div>
+  <div class="panel" style="width:min(440px,92vw)">
+    <div class="subtitle" style="margin:0">碎片获取记录</div>
+    <div class="frag-log" id="fragLog"></div>
+  </div>
+  <div class="row" style="margin-top:8px">
+    <button class="btn ghost" id="btnBackpackBack">返回主页</button>
+  </div>
+</div>
+
+<!-- DIY 自制鱼 -->
+<div class="overlay hidden" id="diy">
+  <h1 class="title" style="font-size:40px">DIY 自制鱼</h1>
+  <div class="subtitle" id="diySubtitle">打造你的专属小鱼</div>
+  <canvas class="diy-preview" id="diyPreview" width="240" height="176"></canvas>
+  <div class="panel">
+    <div class="opt-group"><div class="opt-lbl">体型</div><div class="opt-row" id="diyShape"></div></div>
+    <div class="opt-group"><div class="opt-lbl">配色</div><div class="swatches" id="diyPalette"></div></div>
+    <div class="opt-group"><div class="opt-lbl">鱼鳍</div><div class="opt-row" id="diyFin"></div></div>
+    <div class="opt-group"><div class="opt-lbl">鱼尾</div><div class="opt-row" id="diyTail"></div></div>
+    <div class="opt-group"><div class="opt-lbl">鱼眼</div><div class="opt-row" id="diyEye"></div></div>
+    <div class="opt-group"><div class="opt-lbl">花纹</div><div class="opt-row" id="diyPattern"></div></div>
+    <input class="diy-name" id="diyName" placeholder="给小鱼起个名字" maxlength="10">
+    <div class="row">
+      <button class="btn" id="btnDiySave">保存</button>
+      <button class="btn secondary" id="btnDiyEquip">保存并装备</button>
+    </div>
+  </div>
+  <div class="subtitle" style="margin-top:4px">已保存的DIY鱼（点击装备）</div>
+  <div class="diy-list" id="diyList"></div>
+  <div class="row" style="margin-top:8px">
+    <button class="btn ghost" id="btnDiyBack">返回主页</button>
   </div>
 </div>
 
@@ -205,15 +475,314 @@ const AudioSys = {
 // body: round | tall | eel | shark | sword | long | koi | plump
 // pattern: null | 'band' | 'stripe' | 'spot' | 'tailbar'
 const SPECIES = [
-  { id:'blue',   name:'蓝色小鱼', body:'round',  c1:'#3fa7ff', c2:'#2a6df4', belly:'#dff1ff', pattern:null,    sizeMin:10, sizeMax:30, speed:1.5,  value:2,  agg:0 },
-  { id:'flesh',  name:'肉色小鱼', body:'tall',   c1:'#ffcfa8', c2:'#f5a97f', belly:'#ffe9d6', pattern:null,    sizeMin:15, sizeMax:40, speed:1.4,  value:3,  agg:0 },
-  { id:'koi',    name:'红色金鲤', body:'koi',    c1:'#ff5a4e', c2:'#ff8a3d', belly:'#ffe0c0', pattern:'band',   sizeMin:25, sizeMax:50, speed:1.0,  value:6,  agg:0 },
-  { id:'ribbon', name:'黑黄带鱼', body:'eel',    c1:'#2e2e2e', c2:'#171717', belly:'#ffd23f', pattern:'stripe', patColor:'rgba(255,210,63,.95)', sizeMin:40, sizeMax:70, speed:1.2, value:10, agg:0.5 },
-  { id:'yellow', name:'浅黄鱼',   body:'plump',  c1:'#ffe9a8', c2:'#ffd75e', belly:'#fffbe0', pattern:null,    sizeMin:50, sizeMax:80, speed:0.95, value:8,  agg:0 },
-  { id:'black',  name:'大黑鱼',   body:'long',   c1:'#3a3f46', c2:'#1c1f24', belly:'#8a919a', pattern:null,    eyeScale:0.55, sizeMin:70, sizeMax:100, speed:0.85, value:16, agg:0.6 },
-  { id:'tuna',   name:'蓝金枪鱼', body:'sword',  c1:'#2e6bb8', c2:'#1e4f8f', belly:'#dce9f7', pattern:null,    sizeMin:90, sizeMax:125, speed:1.3,  value:26, agg:0.8 },
-  { id:'shark',  name:'深蓝鲨鱼', body:'shark',  c1:'#1e3a5f', c2:'#14294a', belly:'#cfe0f0', pattern:null,    eye:'#ff2b2b', sizeMin:110, sizeMax:150, speed:1.15, value:45, agg:1 },
+  { id:'blue',   name:'蓝色小鱼', body:'round',  c1:'#3fa7ff', c2:'#2a6df4', belly:'#dff1ff', pattern:null,    sizeMin:10, sizeMax:30, speed:1.5,  value:2,  agg:0,   fragCost:0 },
+  { id:'flesh',  name:'肉色小鱼', body:'tall',   c1:'#ffcfa8', c2:'#f5a97f', belly:'#ffe9d6', pattern:null,    sizeMin:15, sizeMax:40, speed:1.4,  value:3,  agg:0,   fragCost:0 },
+  { id:'koi',    name:'红色金鲤', body:'koi',    c1:'#ff5a4e', c2:'#ff8a3d', belly:'#ffe0c0', pattern:'band',   sizeMin:25, sizeMax:50, speed:1.0,  value:6,  agg:0,   fragCost:5 },
+  { id:'ribbon', name:'黑黄带鱼', body:'eel',    c1:'#2e2e2e', c2:'#171717', belly:'#ffd23f', pattern:'stripe', patColor:'rgba(255,210,63,.95)', sizeMin:40, sizeMax:70, speed:1.2, value:10, agg:0.5, fragCost:8 },
+  { id:'yellow', name:'浅黄鱼',   body:'plump',  c1:'#ffe9a8', c2:'#ffd75e', belly:'#fffbe0', pattern:null,    sizeMin:50, sizeMax:80, speed:0.95, value:8,  agg:0,   fragCost:12 },
+  { id:'black',  name:'大黑鱼',   body:'long',   c1:'#3a3f46', c2:'#1c1f24', belly:'#8a919a', pattern:null,    eyeScale:0.55, sizeMin:70, sizeMax:100, speed:0.85, value:16, agg:0.6, fragCost:18 },
+  { id:'tuna',   name:'蓝金枪鱼', body:'sword',  c1:'#2e6bb8', c2:'#1e4f8f', belly:'#dce9f7', pattern:null,    sizeMin:90, sizeMax:125, speed:1.3,  value:26, agg:0.8, fragCost:25 },
+  { id:'shark',  name:'深蓝鲨鱼', body:'shark',  c1:'#1e3a5f', c2:'#14294a', belly:'#cfe0f0', pattern:null,    eye:'#ff2b2b', sizeMin:110, sizeMax:150, speed:1.15, value:45, agg:1,   fragCost:35 },
+  // VIP 稀有高阶鱼种：不刷入对局（spawn:false），碎片 + 等级门槛解锁；body 为专属高阶体型，渲染走 drawVipBody
+  { id:'dragon',    name:'龙形海兽', body:'dragon',    c1:'#3fe0c0', c2:'#1a6fb8', belly:'#dfffe8', eye:'#00e8c8', sizeMin:80,  sizeMax:150, speed:1.0,  value:150, agg:0, fragCost:120, eatGate:800,  vip:true, spawn:false, rarity:'传说', glow:'#7ef0ff', fx:'trail' },
+  { id:'mechshark', name:'机械鲨鱼', body:'mechshark', c1:'#9fb6c8', c2:'#3a4a5c', belly:'#cfe0ee', eye:'#ff2b2b', sizeMin:70,  sizeMax:150, speed:1.15, value:110, agg:0, fragCost:90,  eatGate:500,  vip:true, spawn:false, rarity:'史诗', glow:'#ff3a3a', fx:'thruster' },
+  { id:'jelly',     name:'星空水母', body:'jelly',     c1:'#c9a6ff', c2:'#6a3ad0', belly:'#efe6ff', eye:'#d0b0ff', sizeMin:70,  sizeMax:150, speed:0.85, value:130, agg:0, fragCost:150, eatGate:1000, vip:true, spawn:false, rarity:'传说', glow:'#c08aff', fx:'stardust' },
+  { id:'demonray',  name:'恶魔鳐',   body:'demonray',  c1:'#3a2a3e', c2:'#14101c', belly:'#7a2030', eye:'#ff2b2b', sizeMin:80,  sizeMax:150, speed:1.0,  value:120, agg:0, fragCost:90,  eatGate:500,  vip:true, spawn:false, rarity:'史诗', glow:'#ff2b2b', fx:'flame' },
+  { id:'turtle',    name:'极光海龟', body:'turtle',    c1:'#5ad8ff', c2:'#1a6fa0', belly:'#d0f4ff', eye:'#3fd0ff', sizeMin:60,  sizeMax:150, speed:0.8,  value:100, agg:0, fragCost:60,  eatGate:300,  vip:true, spawn:false, rarity:'稀有', glow:'#5ad8ff', fx:'ice' },
+  { id:'goldking',  name:'黄金鲨王', body:'goldking',  c1:'#ffe08a', c2:'#d6a11e', belly:'#fff3cf', eye:'#ffb300', sizeMin:100, sizeMax:150, speed:1.1,  value:200, agg:0, fragCost:200, eatGate:1500, vip:true, spawn:false, rarity:'传说', glow:'#ffd23f', fx:'halo' },
 ];
+
+/* ---------- 玩家等级 / 称号（由累计吞噬数派生，不额外存档） ---------- */
+function levelOf(totalEaten) {
+  return Math.min(100, Math.floor((totalEaten || 0) / 30) + 1);
+}
+function titleOf(level) {
+  if (level >= 55) return '海洋之王';
+  if (level >= 35) return '深渊统领';
+  if (level >= 20) return '海洋霸主';
+  if (level >= 10) return '深海猎手';
+  if (level >= 5) return '见习渔夫';
+  return '新手鱼苗';
+}
+// 锁定态进度文案：还差 N 片（VIP 额外标注所需等级）
+function lockText(sp) {
+  const need = Math.max(0, sp.fragCost - Frag.countOf(sp.id));
+  let t = '还差 ' + need + ' 片';
+  if (sp.vip && Skins.state.totalEaten < sp.eatGate) t += ' · 需 Lv.' + levelOf(sp.eatGate);
+  return t;
+}
+
+/* ============================================================
+   皮肤收集解锁模块（localStorage 持久化）
+   ============================================================ */
+// state: { totalEaten:累计吞噬数, selected:当前皮肤key, unlocked:已解锁皮肤id, frags:碎片数, fragLog:获取记录, diy:自制鱼 }
+const FRAG_DROP_RATE = 0.75;   // 吞噬掉落碎片概率
+const VIP_FRAG_DROP_RATE = 0.08; // 吞噬时稀有全局掉落 VIP 碎片概率
+
+/* ---------- 本地存储抽象（浏览器 localStorage / 抖音 tt 存储 双兼容） ---------- */
+function readLocal(key) {
+  try {
+    if (typeof tt !== 'undefined' && tt.getStorageSync) return tt.getStorageSync(key) || '';
+    return localStorage.getItem(key) || '';
+  } catch (e) { return ''; }
+}
+function writeLocal(key, value) {
+  try {
+    if (typeof tt !== 'undefined' && tt.setStorageSync) { tt.setStorageSync(key, value); return; }
+    localStorage.setItem(key, value);
+  } catch (e) {}
+}
+
+const Skins = {
+  KEY: 'bigfish_skins',
+  state: { totalEaten: 0, selected: 'blue', unlocked: [], frags: {}, fragLog: [], diy: [], nickname: '', ts: 0 },
+
+  // 从 localStorage 读取，补齐缺失字段默认值，并确保初始皮肤（fragCost=0）默认可用
+  load() {
+    try {
+      const d = JSON.parse(readLocal(this.KEY) || '{}');
+      this.state.totalEaten = d.totalEaten || 0;
+      this.state.selected = d.selected || 'blue';
+      this.state.unlocked = Array.isArray(d.unlocked) ? d.unlocked : [];
+      this.state.frags = (d.frags && typeof d.frags === 'object') ? d.frags : {};
+      this.state.fragLog = Array.isArray(d.fragLog) ? d.fragLog : [];
+      this.state.diy = Array.isArray(d.diy) ? d.diy : [];
+      this.state.nickname = typeof d.nickname === 'string' ? d.nickname : '';
+      this.state.ts = d.ts || 0;
+    } catch (e) { this.state = { totalEaten: 0, selected: 'blue', unlocked: [], frags: {}, fragLog: [], diy: [], nickname: '', ts: 0 }; }
+    for (const s of SPECIES) {
+      if (s.fragCost === 0 && !this.state.unlocked.includes(s.id)) this.state.unlocked.push(s.id);
+    }
+    if (!resolveSpecies(this.state.selected)) this.state.selected = 'blue';
+  },
+
+  save() { writeLocal(this.KEY, JSON.stringify(this.state)); },
+
+  isUnlocked(id) {
+    if (id && id.indexOf('diy:') === 0) return true;      // DIY 鱼始终可用
+    const sp = SPECIES.find(s => s.id === id);
+    if (sp && sp.fragCost === 0) return true;             // 初始皮肤
+    return this.state.unlocked.includes(id);
+  },
+
+  // 累计吞噬统计（解锁改由碎片驱动，不再自动解锁）
+  addEat(n = 1) {
+    this.state.totalEaten += n;
+    this.save();
+  },
+
+  // 统一解锁判定：碎片集齐（VIP 鱼还需 Lv/吞噬数达标）→ 加入 unlocked，返回新增解锁列表
+  checkUnlocks() {
+    const newly = [];
+    for (const s of SPECIES) {
+      if (s.fragCost === 0 || this.state.unlocked.includes(s.id)) continue;
+      if ((this.state.frags[s.id] || 0) < s.fragCost) continue;
+      if (s.vip && this.state.totalEaten < (s.eatGate || 0)) continue;
+      this.state.unlocked.push(s.id);
+      newly.push(s);
+    }
+    if (newly.length) this.save();
+    return newly;
+  },
+
+  select(id) {
+    if (!this.isUnlocked(id)) return false;
+    this.state.selected = id;
+    this.save();
+    return true;
+  },
+};
+
+/* ---------- 碎片系统 ---------- */
+const Frag = {
+  costOf(id) {
+    const sp = SPECIES.find(s => s.id === id);
+    return sp ? sp.fragCost : 0;
+  },
+  countOf(id) { return Skins.state.frags[id] || 0; },
+  // 吞噬事件触发：按概率掉落对应鱼种碎片；仅累加碎片 + 写日志 + 存档，解锁交由 Skins.checkUnlocks 统一判定
+  drop(speciesId) {
+    if (!SPECIES.some(s => s.id === speciesId)) return { dropped: false, name: '' };
+    const dropped = Math.random() < FRAG_DROP_RATE;
+    if (dropped) {
+      Skins.state.frags[speciesId] = (Skins.state.frags[speciesId] || 0) + 1;
+      const sp = SPECIES.find(s => s.id === speciesId);
+      Skins.state.fragLog.unshift({ id: speciesId, name: sp.name, t: Date.now() });
+      if (Skins.state.fragLog.length > 30) Skins.state.fragLog.length = 30;
+    }
+    Skins.save();
+    return { dropped, name: dropped ? (SPECIES.find(s => s.id === speciesId).name) : '' };
+  },
+
+  // VIP 稀有全局掉落：吞噬任意鱼时小概率掉 1 个随机 VIP 鱼种碎片；仅累加碎片，解锁交由 checkUnlocks
+  dropVip() {
+    const vipPool = SPECIES.filter(s => s.vip && s.spawn === false);
+    if (!vipPool.length) return { dropped: false, name: '' };
+    if (Math.random() >= VIP_FRAG_DROP_RATE) return { dropped: false, name: '' };
+    const sp = vipPool[Math.floor(Math.random() * vipPool.length)];
+    Skins.state.frags[sp.id] = (Skins.state.frags[sp.id] || 0) + 1;
+    Skins.state.fragLog.unshift({ id: sp.id, name: sp.name, t: Date.now() });
+    if (Skins.state.fragLog.length > 30) Skins.state.fragLog.length = 30;
+    Skins.save();
+    return { dropped: true, name: sp.name };
+  },
+};
+
+/* ---------- DIY 自制鱼常量 ---------- */
+const DIY_SHAPES = { round:[1.5,0.65], tall:[1.4,0.8], long:[1.9,0.55], plump:[1.15,0.9], eel:[2.2,0.45] };
+const DIY_TAILS  = ['fan', 'fork', 'round', 'point'];
+const DIY_FINS   = ['sail', 'spike', 'wave', 'none'];
+const DIY_EYES   = ['normal', 'big', 'dot', 'star'];
+const DIY_PATTERNS = [null, 'band', 'stripe', 'spot', 'tailbar'];
+const PALETTE = [
+  { name:'碧蓝', c1:'#3fa7ff', c2:'#2a6df4', belly:'#dff1ff' },
+  { name:'珊瑚', c1:'#ff8f7a', c2:'#f25a4e', belly:'#ffe0d6' },
+  { name:'金鲤', c1:'#ff5a4e', c2:'#ff8a3d', belly:'#ffe0c0' },
+  { name:'柠檬', c1:'#ffe9a8', c2:'#ffd75e', belly:'#fffbe0' },
+  { name:'薄荷', c1:'#7af0c8', c2:'#2ec98a', belly:'#e2ffef' },
+  { name:'紫罗', c1:'#c9a6ff', c2:'#8a5cf0', belly:'#efe6ff' },
+  { name:'墨黑', c1:'#3a3f46', c2:'#1c1f24', belly:'#8a919a' },
+  { name:'樱粉', c1:'#ffb6d5', c2:'#ff6fa5', belly:'#ffe6f0' },
+];
+
+/* ---------- DIY 自制鱼模块 ---------- */
+const DIY = {
+  list() { return Skins.state.diy; },
+  get(uid) { return Skins.state.diy.find(d => d.id === uid); },
+  // 由参数构建一个 DIY 物种对象（body 固定 'diy'，渲染走 DIY 分支）
+  build(params) {
+    return {
+      id: params.id,
+      name: params.name || '我的小鱼',
+      body: 'diy',
+      shape: params.shape || 'round',
+      c1: params.c1, c2: params.c2, belly: params.belly,
+      pattern: params.pattern || null,
+      patColor: params.patColor || 'rgba(255,255,255,.8)',
+      finType: params.finType || 'sail',
+      tailType: params.tailType || 'fan',
+      eyeType: params.eyeType || 'normal',
+      sizeMin: 10, sizeMax: 150, speed: 1, value: 0, agg: 0,
+    };
+  },
+  create(params) {
+    const uid = 'diy:' + 'd' + Date.now().toString(36) + Math.floor(Math.random() * 1e4).toString(36);
+    const fish = this.build({ ...params, id: uid });
+    Skins.state.diy.push(fish);
+    Skins.save();
+    return fish;
+  },
+  remove(uid) {
+    const i = Skins.state.diy.findIndex(d => d.id === uid);
+    if (i >= 0) Skins.state.diy.splice(i, 1);
+    if (Skins.state.selected === uid) Skins.state.selected = 'blue';
+    Skins.save();
+  },
+};
+
+/* ---------- 皮肤 key 解析（官方 id 或 'diy:xxx'） ---------- */
+function resolveSpecies(key) {
+  if (key && key.indexOf('diy:') === 0) return DIY.get(key) || null;
+  return SPECIES.find(s => s.id === key) || null;
+}
+
+/* ---------- 时间格式化（碎片记录用） ---------- */
+function fmtTime(ts) {
+  const d = new Date(ts);
+  const p = n => (n < 10 ? '0' + n : n);
+  return (d.getMonth() + 1) + '-' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+}
+
+/* ============================================================
+   抖音小游戏标准存档系统（云端 + 本地双缓存）
+   策略：实时写本地；回主页/退出/关闭时防抖同步到云端；冲突按时间戳保留最新。
+   ============================================================ */
+const Cloud = {
+  inDouyin: (typeof tt !== 'undefined' && typeof tt.cloud !== 'undefined'),
+  openid: null,
+  _timer: null,
+
+  // 登录：tt.login 取 code → 云函数换 openid；本地无 tt 时降级为随机本地 id
+  login() {
+    return new Promise(resolve => {
+      if (!this.inDouyin) {
+        this.openid = 'local:' + Math.random().toString(36).slice(2, 10);
+        resolve(this.openid);
+        return;
+      }
+      tt.login({
+        success: res => {
+          tt.cloud.callFunction({
+            name: 'save',
+            data: { action: 'login', code: res.code },
+            success: r => { this.openid = (r.result && r.result.openid) || 'local:' + Math.random().toString(36).slice(2, 10); resolve(this.openid); },
+            fail: () => { this.openid = 'local:' + Math.random().toString(36).slice(2, 10); resolve(this.openid); },
+          });
+        },
+        fail: () => { this.openid = 'local:' + Math.random().toString(36).slice(2, 10); resolve(this.openid); },
+      });
+    });
+  },
+
+  // 拉取云端存档：对比时间戳，云端较新则覆盖本地（冲突保留最新）
+  pull() {
+    if (!this.inDouyin || !this.openid) return Promise.resolve();
+    return new Promise(resolve => {
+      tt.cloud.callFunction({
+        name: 'save',
+        data: { action: 'get' },
+        success: r => {
+          const doc = r.result && r.result.data;
+          if (doc && (doc.ts || 0) > (Skins.state.ts || 0)) {
+            const { ts, openid, ...rest } = doc;
+            Object.assign(Skins.state, rest);
+            Skins.state.ts = ts || 0;
+            Skins.save();
+          }
+          resolve();
+        },
+        fail: resolve,
+      });
+    });
+  },
+
+  // 上传本地存档到云端（upsert）
+  push() {
+    if (!this.inDouyin || !this.openid) return Promise.resolve();
+    Skins.state.ts = Date.now();
+    Skins.save();                       // 本地也记录 ts，便于下次 pull 对比
+    return new Promise(resolve => {
+      tt.cloud.callFunction({
+        name: 'save',
+        data: { action: 'set', doc: { ...Skins.state, openid: this.openid, ts: Skins.state.ts } },
+        complete: resolve,
+      });
+    });
+  },
+
+  // 防抖同步：本地改动后不频繁打云端（如改名）
+  requestSync() {
+    if (this._timer) clearTimeout(this._timer);
+    this._timer = setTimeout(() => this.syncNow(), 1500);
+  },
+
+  // 立即同步（回到主页 / 退出对局 / 关闭游戏时触发）
+  syncNow() {
+    if (this._timer) { clearTimeout(this._timer); this._timer = null; }
+    this.push();
+  },
+};
+
+/* ---------- 解锁提示 toast ---------- */
+let toastTimer = null;
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
+}
 
 /* ---------- Canvas ---------- */
 const canvas = document.getElementById('game');
@@ -222,6 +791,9 @@ let fishLayer = document.createElement('canvas');
 let fishCtx = fishLayer.getContext('2d');
 let FISH_W = 720, FISH_H = 480;
 let W = 0, H = 0, DPR = 1;
+// 远景静态背景离屏缓存：水体渐变/阳光光束/礁石/珊瑚只重绘一次，resize 时才重建
+let bgLayer = document.createElement('canvas');
+let bgCtx = bgLayer.getContext('2d');
 function resize() {
   DPR = Math.min(window.devicePixelRatio || 1, 2);
   W = window.innerWidth; H = window.innerHeight;
@@ -230,8 +802,31 @@ function resize() {
   ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
   fishLayer.width = FISH_W * DPR; fishLayer.height = FISH_H * DPR;
   fishCtx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  bgLayer.width = W * DPR; bgLayer.height = H * DPR;
+  bgCtx.setTransform(DPR, 0, 0, DPR, 0, 0);
 }
-window.addEventListener('resize', resize); resize();
+window.addEventListener('resize', () => { resize(); buildBackground(); }); resize();
+
+/* ---------- 性能监测与自动降级 ---------- */
+// Perf：每 0.5s 采样一次 FPS，映射到三档画质
+//   quality 0 = 高（≥50fps 全特效）  1 = 中（35~50 减粒子/降拖尾）  2 = 低（<35 关闭 VIP 高阶光效）
+const Perf = {
+  frames: 0, acc: 0, fps: 60, quality: 0,
+  tick(dt) {
+    this.frames++; this.acc += dt;
+    if (this.acc >= 0.5) {
+      this.fps = this.frames / this.acc;
+      this.frames = 0; this.acc = 0;
+      this.quality = this.fps >= 50 ? 0 : (this.fps >= 35 ? 1 : 2);
+    }
+  },
+  // 粒子数量按画质缩放（quality 越高越少）
+  particleScale() { return this.quality === 0 ? 1 : (this.quality === 1 ? 0.6 : 0.3); }
+};
+// 全局实体/粒子上限：超出上限不再生成新实体，避免内存持续上涨
+const MAX_PARTICLES = 300;
+const MAX_BUBBLES = 120;
+const MAX_FISH = 40;
 
 /* ---------- 输入（纯键盘，上下左右） ---------- */
 const Input = {
@@ -273,6 +868,12 @@ window.addEventListener('keyup', e => { Input.keys[e.code] = false; });
 /* ---------- 粒子 ---------- */
 const particles = [];
 function spawnParticles(x, y, color, n, spread = 3, life = 0.5, size = 3) {
+  // 性能：粒子按画质缩放数量，且超出全局上限不再生成
+  n = Math.floor(n * Perf.particleScale());
+  if (n <= 0) return;
+  const room = MAX_PARTICLES - particles.length;
+  if (room <= 0) return;
+  if (n > room) n = room;
   for (let i = 0; i < n; i++) {
     const a = rand(0, TAU), sp = rand(0.5, spread * 40);
     particles.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: rand(life * 0.5, life), max: life, color, size: rand(size * 0.5, size * 1.6) });
@@ -291,7 +892,9 @@ initBubbles();
 
 // 吃掉小鱼时喷出一串上升的气泡（泡泡粒子特效）
 function spawnBubbleBurst(x, y) {
+  // 性能：气泡数量设上限，超出不再生成
   for (let i = 0; i < 10; i++) {
+    if (bubbles.length >= MAX_BUBBLES) break;
     bubbles.push({ x: x + rand(-14, 14), y: y + rand(-8, 8), r: rand(1.5, 5), sp: rand(50, 110), drift: rand(-18, 18), ph: rand(0, TAU) });
   }
 }
@@ -376,8 +979,9 @@ const Game = {
   select: { mode: 'single', picks: [null, null], player: 0 },
 
   init() {
+    Skins.load();
     try {
-      const b = JSON.parse(localStorage.getItem('bigfish_best') || '{}');
+      const b = JSON.parse(readLocal('bigfish_best') || '{}');
       if (b.single) this.best.single = b.single;
       if (b.double) this.best.double = b.double;
     } catch (e) {}
@@ -388,6 +992,7 @@ const Game = {
     const el = document.getElementById('legend');
     el.innerHTML = '';
     for (const s of SPECIES) {
+      if (s.spawn === false) continue;   // VIP 鱼不参与对局生态，不进菜单图例
       const d = document.createElement('span');
       d.className = 'dot';
       d.innerHTML = `<i style="background:${s.c1};color:${s.c1}"></i>${s.name}`;
@@ -405,8 +1010,8 @@ const Game = {
     this.fishes = [];
 
     const createPlayer = (idx, x, y) => {
-      const sid = this.select.picks[idx] || (idx === 0 ? 'blue' : 'yellow');
-      const sp = SPECIES.find(s => s.id === sid) || SPECIES[0];
+      const sid = this.select.picks[idx] || Skins.state.selected || (idx === 0 ? 'blue' : 'yellow');
+      const sp = resolveSpecies(sid) || SPECIES[0];
       const p = new Fish(sp, x, y, 18);
       p.isPlayer = true; p.playerIndex = idx;
       return p;
@@ -429,12 +1034,34 @@ const Game = {
 
   pause() { if (this.state !== 'play') return; this.state = 'pause'; this.showPause(true); },
   resume() { if (this.state !== 'pause') return; this.state = 'play'; this.showPause(false); AudioSys.click(); },
-  toMenu() { this.state = 'menu'; this.showMenu(true); this.showPause(false); this.showGameOver(false); this.showSelect(false); },
+  toMenu() { this.state = 'menu'; this.hideOverlays(); this.showMenu(true); },
 
+  hideOverlays() {
+    this.showHome(false); this.showMenu(false); this.showPause(false); this.showGameOver(false);
+    this.showSelect(false); this.showAlbum(false); this.showBackpack(false); this.showDiy(false);
+    this.showNickname(false);
+    this.showVipShop(false); this.showQuest(false); this.showMail(false);
+  },
+  showHome(on) { document.getElementById('home').classList.toggle('hidden', !on); },
   showMenu(on) { document.getElementById('menu').classList.toggle('hidden', !on); },
   showPause(on) { document.getElementById('pause').classList.toggle('hidden', !on); },
   showGameOver(on) { document.getElementById('gameover').classList.toggle('hidden', !on); },
   showSelect(on) { document.getElementById('select').classList.toggle('hidden', !on); },
+  showAlbum(on) { document.getElementById('album').classList.toggle('hidden', !on); },
+  showBackpack(on) { document.getElementById('backpack').classList.toggle('hidden', !on); },
+  showDiy(on) { document.getElementById('diy').classList.toggle('hidden', !on); },
+  showNickname(on) { document.getElementById('nickname').classList.toggle('hidden', !on); },
+  showVipShop(on) { document.getElementById('vipshop').classList.toggle('hidden', !on); },
+  showQuest(on) { document.getElementById('quest').classList.toggle('hidden', !on); },
+  showMail(on) { document.getElementById('mail').classList.toggle('hidden', !on); },
+
+  /* ---- VIP商城 / 任务 / 邮件（占位面板） ---- */
+  openVipShop() { this.hideOverlays(); this.showVipShop(true); AudioSys.ensure(); AudioSys.click(); },
+  openQuest()   { this.hideOverlays(); this.showQuest(true);   AudioSys.ensure(); AudioSys.click(); },
+  openMail()    { this.hideOverlays(); this.showMail(true);    AudioSys.ensure(); AudioSys.click(); },
+  closeVipShop() { this.openHome(); },
+  closeQuest()   { this.openHome(); },
+  closeMail()    { this.openHome(); },
 
   openSelect(mode) {
     this.select.mode = mode;
@@ -449,27 +1076,45 @@ const Game = {
     const grid = document.getElementById('selectGrid');
     grid.innerHTML = '';
     for (const s of SPECIES) {
-      const card = document.createElement('button');
-      card.className = 'fish-card';
-      card.dataset.id = s.id;
-      const cv = document.createElement('canvas');
-      cv.width = 240; cv.height = 176;
-      renderFishPreview(cv, s.id);
-      const nm = document.createElement('div');
-      nm.className = 'name'; nm.textContent = s.name;
-      const tg = document.createElement('div');
-      tg.className = 'tag';
-      tg.textContent = s.sizeMax <= 40 ? '小型' : (s.sizeMax <= 80 ? '中型' : (s.sizeMax <= 125 ? '大型' : '顶级'));
-      const bd = document.createElement('div');
-      bd.className = 'badge'; bd.textContent = '';
-      card.appendChild(cv); card.appendChild(nm); card.appendChild(tg); card.appendChild(bd);
-      card.addEventListener('click', () => this.chooseFish(s.id));
-      grid.appendChild(card);
+      grid.appendChild(this.makeSelectCard(s.id, s.name, Skins.isUnlocked(s.id), s.sizeMax, s.fragCost));
+    }
+    for (const d of DIY.list()) {
+      grid.appendChild(this.makeSelectCard(d.id, d.name, true, 150, 0));
     }
     this.updateSelectUI();
   },
 
+  makeSelectCard(id, name, unlocked, sizeMax, fragCost) {
+    const sp = resolveSpecies(id) || SPECIES[0];
+    const card = document.createElement('button');
+    card.className = 'fish-card' + (unlocked ? '' : ' locked') + (sp.vip ? ' vip' : '');
+    card.dataset.id = id;
+    const cv = document.createElement('canvas');
+    cv.width = 240; cv.height = 176;
+    renderSpeciesPreview(cv, sp);
+    const nm = document.createElement('div');
+    nm.className = 'name'; nm.textContent = name;
+    const tg = document.createElement('div');
+    tg.className = 'tag';
+    if (!unlocked) {
+      tg.textContent = (sp.vip ? sp.rarity + ' · ' : '') + lockText(sp);
+    } else {
+      tg.textContent = sp.vip ? (sp.rarity + ' · VIP') : (id.indexOf('diy:') === 0 ? '自制' : (sizeMax <= 40 ? '小型' : (sizeMax <= 80 ? '中型' : (sizeMax <= 125 ? '大型' : '顶级'))));
+    }
+    const bd = document.createElement('div');
+    bd.className = 'badge'; bd.textContent = '';
+    card.appendChild(cv); card.appendChild(nm); card.appendChild(tg); card.appendChild(bd);
+    if (!unlocked && sp.vip) {
+      const seal = document.createElement('span');
+      seal.className = 'seal'; seal.textContent = '封';
+      card.appendChild(seal);
+    }
+    if (unlocked) card.addEventListener('click', () => this.chooseFish(id));
+    return card;
+  },
+
   chooseFish(id) {
+    if (!Skins.isUnlocked(id)) return;
     this.select.picks[this.select.player] = id;
     AudioSys.click();
     if (this.select.mode === 'double' && this.select.player === 0) this.select.player = 1;
@@ -513,14 +1158,290 @@ const Game = {
     this.start(mode);
   },
 
+  openAlbum() {
+    this.albumTab = 'official';
+    this.buildAlbum();
+    this.hideOverlays(); this.showAlbum(true);
+    AudioSys.ensure(); AudioSys.click();
+  },
+
+  closeAlbum() { this.openHome(); },
+
+  setAlbumTab(tab) {
+    this.albumTab = tab;
+    AudioSys.click();
+    this.buildAlbum();
+  },
+
+  buildAlbum() {
+    const tab = this.albumTab || 'official';
+    document.getElementById('tabOfficial').classList.toggle('active', tab === 'official');
+    document.getElementById('tabDiy').classList.toggle('active', tab === 'diy');
+    document.getElementById('albumSubtitle').textContent =
+      tab === 'official'
+        ? '已累计吞噬 ' + Skins.state.totalEaten + ' 条 · 点击已解锁皮肤即可装备'
+        : '点击 DIY 鱼即可装备，支持删除';
+    const grid = document.getElementById('albumGrid');
+    grid.innerHTML = '';
+    if (tab === 'official') {
+      for (const s of SPECIES) this.buildAlbumCard(grid, s.id, s.name, s.fragCost);
+    } else {
+      if (!DIY.list().length) {
+        const e = document.createElement('div'); e.className = 'muted'; e.textContent = '还没有 DIY 鱼，去 DIY 面板创作一只吧';
+        grid.appendChild(e);
+      }
+      for (const d of DIY.list()) this.buildAlbumCard(grid, d.id, d.name, 0);
+    }
+  },
+
+  buildAlbumCard(grid, id, name, fragCost) {
+    const unlocked = Skins.isUnlocked(id);
+    const selected = unlocked && Skins.state.selected === id;
+    const sp = resolveSpecies(id) || SPECIES[0];
+    const card = document.createElement('button');
+    card.className = 'fish-card' + (unlocked ? '' : ' locked') + (selected ? ' p1' : '') + (sp.vip ? ' vip' : '');
+    card.dataset.id = id;
+    const cv = document.createElement('canvas');
+    cv.width = 240; cv.height = 176;
+    renderSpeciesPreview(cv, sp);
+    const nm = document.createElement('div');
+    nm.className = 'name'; nm.textContent = name;
+    const tg = document.createElement('div');
+    tg.className = 'tag';
+    if (!unlocked) {
+      tg.textContent = (sp.vip ? sp.rarity + ' · ' : '') + lockText(sp);
+    } else if (sp.vip) {
+      tg.textContent = sp.rarity + ' · VIP';
+    } else if (id.indexOf('diy:') === 0) {
+      tg.textContent = '自制鱼';
+    } else {
+      tg.textContent = sp.sizeMax <= 40 ? '小型' : (sp.sizeMax <= 80 ? '中型' : (sp.sizeMax <= 125 ? '大型' : '顶级'));
+    }
+    const bd = document.createElement('div');
+    bd.className = 'badge';
+    bd.textContent = selected ? '使用中' : (unlocked ? '' : '未解锁');
+    if (!unlocked) {
+      const prog = document.createElement('div'); prog.className = 'prog';
+      const fill = document.createElement('div'); fill.className = 'prog-fill';
+      fill.style.width = Math.min(100, Frag.countOf(id) / Math.max(1, fragCost) * 100) + '%';
+      prog.appendChild(fill);
+      card.appendChild(cv); card.appendChild(nm); card.appendChild(tg); card.appendChild(prog); card.appendChild(bd);
+    } else {
+      card.appendChild(cv); card.appendChild(nm); card.appendChild(tg); card.appendChild(bd);
+    }
+    if (!unlocked && sp.vip) {
+      const seal = document.createElement('span');
+      seal.className = 'seal'; seal.textContent = '封';
+      card.appendChild(seal);
+    }
+    if (unlocked) card.addEventListener('click', () => this.selectSkin(id));
+    grid.appendChild(card);
+  },
+
+  selectSkin(id) {
+    if (!Skins.select(id)) return;
+    AudioSys.click();
+    this.buildAlbum();
+  },
+
+  /* ---- 背包 ---- */
+  openBackpack() {
+    this.buildBackpack();
+    this.hideOverlays(); this.showBackpack(true);
+    AudioSys.ensure(); AudioSys.click();
+  },
+  closeBackpack() { this.openHome(); },
+  buildBackpack() {
+    document.getElementById('backpackSubtitle').textContent =
+      '已累计吞噬 ' + Skins.state.totalEaten + ' 条 · 吞噬掉落对应鱼种碎片';
+    const grid = document.getElementById('backpackGrid');
+    grid.innerHTML = '';
+    for (const s of SPECIES) {
+      const c = Frag.countOf(s.id), cost = s.fragCost, unlocked = Skins.isUnlocked(s.id);
+      const card = document.createElement('div');
+      card.className = 'frag-card' + (s.vip ? ' vip' : '');
+      const nm = document.createElement('div'); nm.className = 'nm';
+      nm.textContent = s.vip ? (s.rarity + ' · ' + s.name) : s.name;
+      const cnt = document.createElement('div'); cnt.className = 'cnt';
+      if (cost === 0) cnt.textContent = '初始皮肤';
+      else if (unlocked) cnt.textContent = '已解锁';
+      else {
+        let t = c + ' / ' + cost;
+        if (s.vip && Skins.state.totalEaten < s.eatGate) t += ' · 需 Lv.' + levelOf(s.eatGate);
+        cnt.textContent = t;
+      }
+      const prog = document.createElement('div'); prog.className = 'prog';
+      const fill = document.createElement('div'); fill.className = 'prog-fill';
+      fill.style.width = (cost === 0 ? 100 : Math.min(100, c / cost * 100)) + '%';
+      prog.appendChild(fill);
+      card.appendChild(nm); card.appendChild(cnt); card.appendChild(prog);
+      grid.appendChild(card);
+    }
+    const log = document.getElementById('fragLog');
+    log.innerHTML = '';
+    if (!Skins.state.fragLog.length) {
+      const e = document.createElement('div'); e.className = 'entry'; e.textContent = '暂无获取记录';
+      log.appendChild(e);
+    }
+    for (const r of Skins.state.fragLog.slice(0, 20)) {
+      const e = document.createElement('div'); e.className = 'entry';
+      e.textContent = '获得「' + r.name + '」碎片 ×1 · ' + fmtTime(r.t);
+      log.appendChild(e);
+    }
+  },
+
+  /* ---- DIY ---- */
+  openDiy() {
+    this.diyDraft = this.diyDraft || { shape: 0, pal: 0, fin: 0, tail: 0, eye: 0, pattern: 0 };
+    this.buildDiy();
+    this.hideOverlays(); this.showDiy(true);
+    AudioSys.ensure(); AudioSys.click();
+  },
+  closeDiy() { this.openHome(); },
+
+  buildDiy() {
+    const d = this.diyDraft;
+    const shapeKeys = Object.keys(DIY_SHAPES);
+    const shapeNames = ['圆身', '高体', '长条', '圆胖', '带状'];
+    const p = PALETTE[d.pal];
+    const sp = DIY.build({
+      name: '预览', shape: shapeKeys[d.shape],
+      c1: p.c1, c2: p.c2, belly: p.belly,
+      pattern: DIY_PATTERNS[d.pattern],
+      finType: DIY_FINS[d.fin], tailType: DIY_TAILS[d.tail], eyeType: DIY_EYES[d.eye],
+    });
+    renderSpeciesPreview(document.getElementById('diyPreview'), sp);
+    this.buildOptGroup('diyShape', shapeNames, d.shape, 'shape');
+    const pal = document.getElementById('diyPalette');
+    pal.innerHTML = '';
+    PALETTE.forEach((pp, i) => {
+      const sw = document.createElement('button');
+      sw.className = 'swatch' + (i === d.pal ? ' active' : '');
+      sw.style.background = 'linear-gradient(180deg,' + pp.c2 + ',' + pp.c1 + ' 55%,' + pp.belly + ')';
+      sw.title = pp.name;
+      sw.addEventListener('click', () => { this.diyDraft.pal = i; this.buildDiy(); AudioSys.click(); });
+      pal.appendChild(sw);
+    });
+    this.buildOptGroup('diyFin', DIY_FINS, d.fin, 'fin');
+    this.buildOptGroup('diyTail', DIY_TAILS, d.tail, 'tail');
+    this.buildOptGroup('diyEye', DIY_EYES, d.eye, 'eye');
+    this.buildOptGroup('diyPattern', ['无', '环带', '条纹', '斑点', '尾斑'], d.pattern, 'pattern');
+    const list = document.getElementById('diyList');
+    list.innerHTML = '';
+    if (!DIY.list().length) {
+      const e = document.createElement('div'); e.className = 'muted'; e.textContent = '还没有 DIY 鱼';
+      list.appendChild(e);
+    }
+    for (const f of DIY.list()) {
+      const item = document.createElement('div');
+      item.className = 'diy-item';
+      const cv = document.createElement('canvas'); cv.width = 240; cv.height = 176;
+      renderSpeciesPreview(cv, f);
+      const nm = document.createElement('div'); nm.className = 'nm';
+      nm.textContent = f.name + (Skins.state.selected === f.id ? '（使用中）' : '');
+      const eq = document.createElement('button'); eq.className = 'btn ghost btn-mini'; eq.textContent = '装备';
+      eq.addEventListener('click', () => { Skins.select(f.id); this.buildDiy(); AudioSys.click(); });
+      const del = document.createElement('button'); del.className = 'btn ghost btn-mini'; del.textContent = '删除';
+      del.addEventListener('click', () => { DIY.remove(f.id); this.buildDiy(); AudioSys.click(); });
+      item.appendChild(cv); item.appendChild(nm); item.appendChild(eq); item.appendChild(del);
+      list.appendChild(item);
+    }
+  },
+
+  buildOptGroup(id, options, value, key) {
+    const box = document.getElementById(id);
+    box.innerHTML = '';
+    options.forEach((opt, i) => {
+      const b = document.createElement('button');
+      b.className = 'opt-btn' + (i === value ? ' active' : '');
+      b.textContent = opt;
+      b.addEventListener('click', () => { this.diyDraft[key] = i; this.buildDiy(); AudioSys.click(); });
+      box.appendChild(b);
+    });
+  },
+
+  saveDiy(equip) {
+    const d = this.diyDraft;
+    const shapeKeys = Object.keys(DIY_SHAPES);
+    const name = (document.getElementById('diyName').value || '').trim() || '我的小鱼';
+    const p = PALETTE[d.pal];
+    const fish = DIY.create({
+      name, shape: shapeKeys[d.shape],
+      c1: p.c1, c2: p.c2, belly: p.belly,
+      pattern: DIY_PATTERNS[d.pattern],
+      finType: DIY_FINS[d.fin], tailType: DIY_TAILS[d.tail], eyeType: DIY_EYES[d.eye],
+    });
+    if (equip) Skins.select(fish.id);
+    AudioSys.click();
+    this.buildDiy();
+    showToast(equip ? '已保存并装备「' + name + '」' : '已保存「' + name + '」');
+  },
+
+  /* ---- 主页 ---- */
+  openHome() {
+    this.hideOverlays(); this.showHome(true);
+    this.updateHomeStats();
+    Cloud.syncNow();   // 回到主页触发一次云端存档同步
+    AudioSys.ensure(); AudioSys.click();
+  },
+  goStart() { this.hideOverlays(); this.showMenu(true); AudioSys.ensure(); AudioSys.click(); },
+  updateHomeStats() {
+    const eaten = Skins.state.totalEaten;
+    const lv = levelOf(eaten);
+    const sp = resolveSpecies(Skins.state.selected) || SPECIES[0];
+    document.getElementById('homeNick').textContent = Skins.state.nickname || '未命名小鱼';
+    document.getElementById('homeLv').textContent = 'Lv.' + lv + ' · ' + titleOf(lv);
+    document.getElementById('homeFishName').textContent = '出战：' + sp.name;
+    document.getElementById('homeFrag').textContent = this.fragProgressText();
+    document.getElementById('homeStats').textContent = '累计吞噬 ' + eaten + ' 条';
+    this.renderHomeChar();
+  },
+  // 底部碎片进度：当前出战鱼的碎片收集情况（VIP 附带等级门槛提示）
+  fragProgressText() {
+    const sp = resolveSpecies(Skins.state.selected) || SPECIES[0];
+    if (!sp || sp.fragCost === 0) return '碎片 · 初始皮肤';
+    if (Skins.isUnlocked(sp.id)) return '碎片 · 已解锁';
+    let txt = '碎片 ' + Frag.countOf(sp.id) + '/' + sp.fragCost;
+    if (sp.vip && Skins.state.totalEaten < sp.eatGate) txt += ' · 需 Lv.' + levelOf(sp.eatGate);
+    return txt;
+  },
+  // 渲染主页人设区：实时预览当前装备的鱼 + 环绕粒子（待机游动动画，time 驱动）
+  renderHomeChar(time) {
+    const cv = document.getElementById('homeChar');
+    if (!cv) return;
+    const sp = resolveSpecies(Skins.state.selected) || SPECIES[0];
+    renderSpeciesPreview(cv, sp, time || 0);
+    drawHomeOrbit(cv, time || 0);
+  },
+
+  /* ---- 昵称设置 ---- */
+  openNickname() {
+    document.getElementById('nickInput').value = Skins.state.nickname || '';
+    this.hideOverlays(); this.showNickname(true);
+    AudioSys.ensure(); AudioSys.click();
+  },
+  closeNickname() { this.openHome(); },
+  saveNickname() {
+    const name = (document.getElementById('nickInput').value || '').trim().slice(0, 12);
+    Skins.state.nickname = name;
+    Skins.save();
+    Cloud.requestSync();   // 改名触发防抖云端同步
+    AudioSys.click();
+    this.openHome();
+    showToast(name ? ('昵称已设为「' + name + '」') : '已清空昵称');
+  },
+
   spawnFish(fromEdge = true) {
+    // 实体数量上限：超出不再生成，避免内存/碰撞压力持续上涨
+    if (this.fishes.length >= MAX_FISH) return;
     const maxP = Math.max(...this.players.map(p => p.size), 18);
+    const spawnable = SPECIES.filter(s => s.spawn !== false);   // VIP 鱼不参与对局生态
     let target, species;
     const roll = Math.random();
     if (roll < 0.10) {
       // 大型威胁：明显比玩家大，随玩家体型增长（前期是黄鱼/带鱼/黑鱼，后期才有金枪鱼/鲨鱼）
-      const bigs = SPECIES.filter(s => s.sizeMin > maxP * 2);
-      species = pick(bigs.length ? bigs : [SPECIES[SPECIES.length - 1]]);
+      const bigs = spawnable.filter(s => s.sizeMin > maxP * 2);
+      species = pick(bigs.length ? bigs : [spawnable[spawnable.length - 1]]);
       target = rand(species.sizeMin, species.sizeMax);
     } else {
       if (roll < 0.60) target = rand(7, maxP * 0.8);
@@ -528,8 +1449,8 @@ const Game = {
       else target = rand(maxP * 1.05, maxP * 1.5);
       target = clamp(target, 7, 150);
 
-      let candidates = SPECIES.filter(s => s.sizeMax >= target * 0.7 && s.sizeMin <= target * 1.6);
-      if (!candidates.length) candidates = SPECIES;
+      let candidates = spawnable.filter(s => s.sizeMax >= target * 0.7 && s.sizeMin <= target * 1.6);
+      if (!candidates.length) candidates = spawnable;
       species = pick(candidates);
     }
     const size = clamp(target, species.sizeMin, species.sizeMax);
@@ -573,8 +1494,9 @@ const Game = {
     }
     document.getElementById('goScore').textContent = scoreText;
     document.getElementById('goBest').textContent = bestText;
-    try { localStorage.setItem('bigfish_best', JSON.stringify(this.best)); } catch (e) {}
+    writeLocal('bigfish_best', JSON.stringify(this.best));
     this.showGameOver(true);
+    Cloud.syncNow();   // 退出对局触发一次云端存档同步
   },
 
   update(dt) {
@@ -601,9 +1523,30 @@ const Game = {
     const alivePlayers = this.players.filter(p => p.alive);
     const allFishes = this.fishes.filter(f => f.alive);
 
+    // 空间分区：按 300px 网格把鱼分桶，碰撞只查邻近 3x3 桶，避免每条鱼和全场景 O(n²) 循环
+    const CELL = 300;
+    const grid = new Map();
+    for (const f of allFishes) {
+      const cx = Math.floor(f.x / CELL), cy = Math.floor(f.y / CELL);
+      const key = cx + ',' + cy;
+      let b = grid.get(key); if (!b) { b = []; grid.set(key, b); }
+      b.push(f);
+    }
+    const bucket = [];
+    const nearby = (x, y) => {
+      bucket.length = 0;
+      const cx = Math.floor(x / CELL), cy = Math.floor(y / CELL);
+      for (let gx = cx - 1; gx <= cx + 1; gx++) {
+        for (let gy = cy - 1; gy <= cy + 1; gy++) {
+          const b = grid.get(gx + ',' + gy);
+          if (b) for (const f of b) bucket.push(f);
+        }
+      }
+    };
+
     for (const p of alivePlayers) {
-      for (let i = allFishes.length - 1; i >= 0; i--) {
-        const f = allFishes[i];
+      nearby(p.x, p.y);
+      for (const f of bucket) {
         if (!f.alive) continue;
         const d = dist(p.x, p.y, f.x, f.y);
         const eatR = p.size + f.size * 0.4;
@@ -618,8 +1561,8 @@ const Game = {
     // AI 捕食 AI（轻量生态）
     for (const pred of allFishes) {
       if (!pred.alive || pred.species.agg <= 0) continue;
-      for (let i = allFishes.length - 1; i >= 0; i--) {
-        const f = allFishes[i];
+      nearby(pred.x, pred.y);
+      for (const f of bucket) {
         if (f === pred || !f.alive) continue;
         if (f.size > pred.size * 0.5) continue;
         if (dist2(pred.x, pred.y, f.x, f.y) < (pred.size + f.size) * (pred.size + f.size) * 0.5) {
@@ -643,6 +1586,19 @@ const Game = {
     spawnParticles(f.x, f.y, f.species.c2, 10, 0.6, 0.5, 3);
     spawnParticles(f.x, f.y, '#ffffff', 4, 0.4, 0.3, 2);
     AudioSys.eat(p.size);
+
+    // 累计吞噬统计 + 碎片掉落判定（解锁统一由 Skins.checkUnlocks 处理）
+    Skins.addEat(1);
+    const drop = Frag.drop(f.species.id);
+    if (drop.dropped) showToast('掉落碎片：「' + drop.name + '」');
+    // VIP 稀有全局掉落判定
+    const vip = Frag.dropVip();
+    if (vip.dropped) showToast('掉落稀有碎片：「' + vip.name + '」');
+    const newly = Skins.checkUnlocks();
+    if (newly.length) {
+      const names = newly.map(s => s.name).join('、');
+      showToast(newly.some(s => s.vip) ? '解锁 VIP 鱼种：' + names : '解锁新皮肤：' + names);
+    }
   },
 
   comboMul(p) { return 1 + Math.min(p.combo, 10) * 0.1; },
@@ -708,24 +1664,44 @@ const Game = {
    渲染
    ============================================================ */
 // 在选鱼界面的小画布上渲染鱼的预览（复用 drawFishBody，临时替换全局离屏层）
-function renderFishPreview(canvas, speciesId) {
-  const sp = SPECIES.find(s => s.id === speciesId) || SPECIES[0];
+// time>0 时进入待机游动（尾巴摆动 + VIP 特效动画）
+let previewLayer = null;   // 复用的离屏层，避免每帧 new canvas 造成 GC 卡顿
+function renderSpeciesPreview(canvas, sp, time) {
+  time = time || 0;
   const pctx = canvas.getContext('2d');
   const cw = canvas.width, ch = canvas.height;
   pctx.clearRect(0, 0, cw, ch);
 
-  const layer = document.createElement('canvas');
-  layer.width = cw; layer.height = ch;
-  const lctx = layer.getContext('2d');
+  if (!previewLayer) previewLayer = document.createElement('canvas');
+  previewLayer.width = cw; previewLayer.height = ch;
+  const lctx = previewLayer.getContext('2d');
 
   const saved = { ctx, fishLayer, fishCtx, FISH_W, FISH_H };
-  ctx = pctx; fishLayer = layer; fishCtx = lctx; FISH_W = cw; FISH_H = ch;
+  ctx = pctx; fishLayer = previewLayer; fishCtx = lctx; FISH_W = cw; FISH_H = ch;
 
   const f = new Fish(sp, cw / 2, ch / 2, 34);
-  f.dir = 1; f.hueShift = 0; f.tailPhase = 0.35;
-  drawFishBody(f, 0);
+  f.dir = 1; f.hueShift = 0;
+  f.tailPhase = time > 0 ? Math.sin(time * 4) * 0.6 : 0.35;
+  drawFishBody(f, time);
 
   ctx = saved.ctx; fishLayer = saved.fishLayer; fishCtx = saved.fishCtx; FISH_W = saved.FISH_W; FISH_H = saved.FISH_H;
+}
+
+// 主页角色区：待机游动 + 环绕粒子/气泡/光影
+function drawHomeOrbit(canvas, time) {
+  const cv = canvas.getContext('2d');
+  const cx = canvas.width / 2, cy = canvas.height / 2;
+  for (let i = 0; i < 6; i++) {
+    const a = i / 6 * TAU + time * 0.7;
+    const rr = canvas.width * (0.34 + 0.06 * Math.sin(time * 1.5 + i));
+    const px = cx + Math.cos(a) * rr, py = cy + Math.sin(a) * rr * 0.6;
+    const tw = 0.5 + 0.5 * Math.sin(time * 2 + i * 1.7);
+    cv.fillStyle = 'rgba(150,230,255,' + (0.2 + tw * 0.3) + ')';
+    cv.beginPath(); cv.arc(px, py, 2 + tw * 2, 0, TAU); cv.fill();
+  }
+}
+function renderFishPreview(canvas, speciesId) {
+  renderSpeciesPreview(canvas, resolveSpecies(speciesId) || SPECIES[0]);
 }
 
 function drawFishBody(f, time) {
@@ -743,9 +1719,23 @@ function drawFishBody(f, time) {
 
   const wag = Math.sin(f.tailPhase) * 0.5;
 
+  // VIP 高阶鱼种：完全自定义外观 + 专属特效层，不进普通鱼尾巴/身体/嘴巴管线
+  if (sp.vip) {
+    drawVipBody(sp, s, f, time, wag);
+    ctx.restore();
+    ctx = mainCtx;
+    mainCtx.drawImage(fishLayer, f.x - FISH_W / 2, f.y - FISH_H / 2, FISH_W, FISH_H);
+    drawPlayerLabel(f);
+    return;
+  }
+
   // 体型比例（半长 L、半高 H，乘以尺寸 s）：拉成长条状
   let Lr, Hr;
-  if (sp.body === 'eel')         { Lr = 2.2;  Hr = 0.45; }
+  if (sp.body === 'diy') {
+    const pr = DIY_SHAPES[sp.shape] || DIY_SHAPES.round;
+    Lr = pr[0]; Hr = pr[1];
+  }
+  else if (sp.body === 'eel')         { Lr = 2.2;  Hr = 0.45; }
   else if (sp.body === 'tall')   { Lr = 1.4;  Hr = 0.8; }
   else if (sp.body === 'shark')  { Lr = 1.4;  Hr = 0.75; }
   else if (sp.body === 'sword')  { Lr = 1.9;  Hr = 0.6; }
@@ -760,7 +1750,9 @@ function drawFishBody(f, time) {
   const tailX = -bodyL * 0.88;
   const tailW = s * 1.1;
   ctx.fillStyle = shade(sp.c2, f.hueShift);
-  if (sp.body === 'eel') {
+  if (sp.tailType) {
+    drawDiyTail(sp.tailType, tailX, tailW, s, wag);
+  } else if (sp.body === 'eel') {
     ctx.beginPath();
     ctx.moveTo(tailX, 0);
     ctx.lineTo(tailX - s * 1.5, -tailW * 0.5 + wag * 6);
@@ -869,6 +1861,9 @@ function drawFishBody(f, time) {
     ctx.lineWidth = Math.max(1, s * 0.05);
     ctx.beginPath(); ctx.moveTo(bodyL * 0.68, bodyH * 0.02); ctx.quadraticCurveTo(bodyL * 0.86, bodyH * 0.22, bodyL * 0.92, bodyH * 0.38); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(bodyL * 0.68, -bodyH * 0.04); ctx.quadraticCurveTo(bodyL * 0.84, -bodyH * 0.18, bodyL * 0.9, -bodyH * 0.32); ctx.stroke();
+  } else if (sp.body === 'diy') {
+    // DIY 自制鱼：只画椭圆身，鳍/尾/眼由 drawDiy 系列按参数绘制
+    ellipse(0, 0, bodyL, bodyH); ctx.fill();
   } else {
     // 默认长条鱼身
     ellipse(0, 0, bodyL, bodyH); ctx.fill();
@@ -881,6 +1876,9 @@ function drawFishBody(f, time) {
     // 腹鳍
     ctx.beginPath(); ctx.moveTo(-bodyL * 0.12, bodyH * 0.55); ctx.lineTo(-bodyL * 0.3, bodyH * 1.0); ctx.lineTo(-bodyL * 0.0, bodyH * 0.72); ctx.closePath(); ctx.fill();
   }
+
+  // DIY 背鳍（在身体绘制后叠加）
+  if (sp.body === 'diy' && sp.finType && sp.finType !== 'none') drawDiyFin(sp.finType, bodyL, bodyH, s, f);
 
   // 高光（立体感）
   ctx.save();
@@ -1000,7 +1998,9 @@ function drawFishBody(f, time) {
   const eScale = sp.eyeScale || 1;
   const eyeX = bodyL * 0.5, eyeY = -bodyH * 0.12;
   const eyeR = s * 0.2 * eScale;
-  if (sp.eye) {
+  if (sp.eyeType) {
+    drawDiyEye(sp.eyeType, eyeX, eyeY, eyeR, s);
+  } else if (sp.eye) {
     // 特殊眼睛（如鲨鱼红眼）
     ctx.fillStyle = sp.eye;
     ctx.beginPath(); ctx.arc(eyeX, eyeY, eyeR, 0, TAU); ctx.fill();
@@ -1022,21 +2022,107 @@ function drawFishBody(f, time) {
   mainCtx.drawImage(fishLayer, f.x - FISH_W / 2, f.y - FISH_H / 2, FISH_W, FISH_H);
 
   // 玩家标签
-  if (f.isPlayer) {
-    ctx.save();
-    ctx.translate(f.x, f.y - f.size - 22);
-    ctx.fillStyle = f.playerIndex === 0 ? '#ffd23f' : '#24c26d';
-    ctx.font = 'bold 16px "Microsoft YaHei"';
-    ctx.textAlign = 'center';
-    ctx.fillText(f.playerIndex === 0 ? 'P1' : 'P2', 0, 0);
-    if (f.dashCooldown > 0) {
-      ctx.fillStyle = 'rgba(255,255,255,.35)';
-      ctx.fillRect(-16, 6, 32, 3);
-      ctx.fillStyle = '#fff';
-      ctx.fillRect(-16, 6, 32 * (1 - f.dashCooldown / 1.4), 3);
-    }
-    ctx.restore();
+  drawPlayerLabel(f);
+}
+
+function drawPlayerLabel(f) {
+  if (!f.isPlayer) return;
+  ctx.save();
+  ctx.translate(f.x, f.y - f.size - 22);
+  ctx.fillStyle = f.playerIndex === 0 ? '#ffd23f' : '#24c26d';
+  ctx.font = 'bold 16px "Microsoft YaHei"';
+  ctx.textAlign = 'center';
+  ctx.fillText(f.playerIndex === 0 ? 'P1' : 'P2', 0, 0);
+  if (f.dashCooldown > 0) {
+    ctx.fillStyle = 'rgba(255,255,255,.35)';
+    ctx.fillRect(-16, 6, 32, 3);
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(-16, 6, 32 * (1 - f.dashCooldown / 1.4), 3);
   }
+  ctx.restore();
+}
+
+/* ---------- DIY 鱼的鳍/尾/眼绘制（仅 body==='diy' 时调用） ---------- */
+function drawDiyTail(type, tailX, tailW, s, wag) {
+  ctx.beginPath();
+  if (type === 'fan') {
+    ctx.moveTo(tailX, 0);
+    ctx.quadraticCurveTo(tailX - s * 1.1, -tailW * 0.7 + wag * 5, tailX - s * 1.3, 0);
+    ctx.quadraticCurveTo(tailX - s * 1.1, tailW * 0.7 + wag * 5, tailX, 0);
+  } else if (type === 'fork') {
+    ctx.moveTo(tailX, 0);
+    ctx.lineTo(tailX - s * 1.2, -tailW * 0.6 + wag * 5);
+    ctx.lineTo(tailX - s * 0.7, 0);
+    ctx.lineTo(tailX - s * 1.2, tailW * 0.6 + wag * 5);
+  } else if (type === 'round') {
+    ctx.moveTo(tailX, 0);
+    ctx.quadraticCurveTo(tailX - s * 0.6, -tailW * 0.55 + wag * 4, tailX - s * 0.8, 0);
+    ctx.quadraticCurveTo(tailX - s * 0.6, tailW * 0.55 + wag * 4, tailX, 0);
+  } else {
+    ctx.moveTo(tailX, 0);
+    ctx.lineTo(tailX - s * 1.1, -tailW * 0.45 + wag * 5);
+    ctx.lineTo(tailX - s * 1.1, tailW * 0.45 + wag * 5);
+  }
+  ctx.closePath(); ctx.fill();
+}
+function drawDiyFin(type, bodyL, bodyH, s, f) {
+  ctx.fillStyle = shade(f.species.c2, f.hueShift + 6);
+  if (type === 'sail') {
+    ctx.beginPath();
+    ctx.moveTo(-bodyL * 0.25, -bodyH * 0.7);
+    ctx.quadraticCurveTo(0, -bodyH * 1.5, bodyL * 0.3, -bodyH * 0.62);
+    ctx.closePath(); ctx.fill();
+  } else if (type === 'spike') {
+    ctx.beginPath();
+    ctx.moveTo(-bodyL * 0.3, -bodyH * 0.6);
+    ctx.lineTo(-bodyL * 0.05, -bodyH * 1.25);
+    ctx.lineTo(0, -bodyH * 0.6);
+    ctx.lineTo(bodyL * 0.2, -bodyH * 1.1);
+    ctx.lineTo(bodyL * 0.35, -bodyH * 0.6);
+    ctx.closePath(); ctx.fill();
+  } else if (type === 'wave') {
+    ctx.beginPath();
+    ctx.moveTo(-bodyL * 0.35, -bodyH * 0.62);
+    ctx.quadraticCurveTo(-bodyL * 0.2, -bodyH * 1.05, -bodyL * 0.05, -bodyH * 0.7);
+    ctx.quadraticCurveTo(bodyL * 0.1, -bodyH * 1.15, bodyL * 0.3, -bodyH * 0.62);
+    ctx.closePath(); ctx.fill();
+  }
+  // 胸鳍（小）
+  ctx.beginPath(); ctx.ellipse(-bodyL * 0.1, bodyH * 0.62, s * 0.28, s * 0.15, 0.6, 0, TAU); ctx.fill();
+}
+function drawDiyEye(type, eyeX, eyeY, eyeR, s) {
+  if (type === 'big') {
+    ctx.fillStyle = '#fff';
+    ctx.beginPath(); ctx.arc(eyeX, eyeY, eyeR * 1.35, 0, TAU); ctx.fill();
+    ctx.fillStyle = '#111';
+    ctx.beginPath(); ctx.arc(eyeX + s * 0.05, eyeY, s * 0.14, 0, TAU); ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.beginPath(); ctx.arc(eyeX + s * 0.07, eyeY - s * 0.05, s * 0.05, 0, TAU); ctx.fill();
+  } else if (type === 'dot') {
+    ctx.fillStyle = '#111';
+    ctx.beginPath(); ctx.arc(eyeX, eyeY, s * 0.09, 0, TAU); ctx.fill();
+  } else if (type === 'star') {
+    ctx.fillStyle = '#ffd23f';
+    drawStar(eyeX, eyeY, eyeR * 1.1, eyeR * 0.45, 5);
+    ctx.fill();
+  } else {
+    ctx.fillStyle = '#fff';
+    ctx.beginPath(); ctx.arc(eyeX, eyeY, eyeR, 0, TAU); ctx.fill();
+    ctx.fillStyle = '#111';
+    ctx.beginPath(); ctx.arc(eyeX + s * 0.05, eyeY, s * 0.11, 0, TAU); ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.beginPath(); ctx.arc(eyeX + s * 0.07, eyeY - s * 0.04, s * 0.04, 0, TAU); ctx.fill();
+  }
+}
+function drawStar(cx, cy, outer, inner, points) {
+  ctx.beginPath();
+  for (let i = 0; i < points * 2; i++) {
+    const r = i % 2 === 0 ? outer : inner;
+    const a = -Math.PI / 2 + i * Math.PI / points;
+    const x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r;
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  }
+  ctx.closePath();
 }
 
 function shade(hex, amt) {
@@ -1054,6 +2140,455 @@ function clipBodyShape(sp, bodyL, bodyH) {
   else if (sp.body === 'sword') { ctx.beginPath(); ctx.moveTo(bodyL, 0); ctx.quadraticCurveTo(bodyL * 0.3, -bodyH, -bodyL, 0); ctx.quadraticCurveTo(bodyL * 0.3, bodyH, bodyL, 0); }
   else ellipse(0, 0, bodyL, bodyH);
   ctx.clip();
+}
+
+/* ============================================================
+   VIP 高阶鱼种渲染：6 款专属外观 + 6 款专属特效层
+   （同一 fishCtx + translate/scale 坐标系，头朝 +x，尾朝 -x）
+   ============================================================ */
+function drawVipBody(sp, s, f, time, wag) {
+  switch (sp.body) {
+    case 'dragon':    drawDragon(sp, s, f, time, wag); break;
+    case 'mechshark': drawMechShark(sp, s, f, time, wag); break;
+    case 'jelly':     drawJelly(sp, s, f, time, wag); break;
+    case 'demonray':  drawDemonRay(sp, s, f, time, wag); break;
+    case 'turtle':    drawTurtle(sp, s, f, time, wag); break;
+    case 'goldking':  drawGoldKing(sp, s, f, time, wag); break;
+  }
+  // 性能降级：低画质（FPS<35）关闭 VIP 高阶光效/星云/火焰，仅保留基础鱼模型
+  if (Perf.quality === 2) return;
+  switch (sp.fx) {
+    case 'trail':    fxTrail(sp, s, f, time); break;
+    case 'thruster': fxThruster(sp, s, f, time); break;
+    case 'stardust': fxStardust(sp, s, f, time); break;
+    case 'flame':    fxFlame(sp, s, f, time); break;
+    case 'ice':      fxIce(sp, s, f, time); break;
+    case 'halo':     fxHalo(sp, s, f, time); break;
+  }
+}
+
+// 通用眼睛（白底 + 彩瞳 + 高光）
+function vipEye(x, y, r, color) {
+  ctx.fillStyle = '#fff';
+  ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fill();
+  ctx.fillStyle = color || '#111';
+  ctx.beginPath(); ctx.arc(x + r * 0.25, y, r * 0.55, 0, TAU); ctx.fill();
+  ctx.fillStyle = '#fff';
+  ctx.beginPath(); ctx.arc(x + r * 0.35, y - r * 0.2, r * 0.2, 0, TAU); ctx.fill();
+}
+
+/* ---- 龙形海兽：蜿蜒蛇身 + 龙角 + 龙须 + 背刺 ---- */
+function drawDragon(sp, s, f, time, wag) {
+  const L = 2.2 * s, H = 0.46 * s, ph = time * 2.6;
+  ctx.save();
+  ctx.shadowColor = sp.glow; ctx.shadowBlur = s * 0.5;
+  const grad = ctx.createLinearGradient(0, -H, 0, H);
+  grad.addColorStop(0, shade(sp.c2, f.hueShift));
+  grad.addColorStop(0.45, shade(sp.c1, f.hueShift));
+  grad.addColorStop(1, shade(sp.belly, f.hueShift));
+  ctx.fillStyle = grad;
+  // 蛇身：沿正弦曲线叠放椭圆，头粗尾细、尾部波动更大
+  const seg = 9;
+  for (let i = 0; i < seg; i++) {
+    const t = i / (seg - 1);
+    const px = L * (1 - t * 1.7) - L * 0.12;
+    const py = Math.sin(t * Math.PI * 1.8 + ph) * H * 0.8 * t;
+    const ang = Math.cos(t * Math.PI * 1.8 + ph) * 0.45 * t;
+    ctx.beginPath();
+    ctx.ellipse(px, py, L * (0.17 + 0.13 * (1 - t)), H * (1 - t * 0.5), ang, 0, TAU);
+    ctx.fill();
+  }
+  ctx.restore();
+  // 背刺
+  ctx.fillStyle = shade(sp.c2, f.hueShift - 14);
+  for (let i = 0; i < 6; i++) {
+    const t = 0.12 + i * 0.14;
+    const px = L * (1 - t * 1.7) - L * 0.12;
+    const py = Math.sin(t * Math.PI * 1.8 + ph) * H * 0.8 * t - H * 0.7;
+    ctx.beginPath();
+    ctx.moveTo(px - s * 0.08, py); ctx.lineTo(px, py - s * 0.3); ctx.lineTo(px + s * 0.08, py);
+    ctx.closePath(); ctx.fill();
+  }
+  // 龙头
+  ctx.save();
+  ctx.shadowColor = sp.glow; ctx.shadowBlur = s * 0.3;
+  ctx.fillStyle = shade(sp.c1, f.hueShift + 6);
+  ctx.beginPath();
+  ctx.moveTo(L, 0);
+  ctx.quadraticCurveTo(L * 0.6, -H * 1.5, L * 0.22, -H * 0.6);
+  ctx.quadraticCurveTo(L * 0.4, 0, L * 0.22, H * 0.6);
+  ctx.quadraticCurveTo(L * 0.6, H * 1.5, L, 0);
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+  // 龙角
+  ctx.strokeStyle = shade(sp.c2, f.hueShift - 10);
+  ctx.lineWidth = Math.max(1.5, s * 0.08); ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(L * 0.5, -H * 0.7); ctx.lineTo(L * 0.58, -H * 1.7); ctx.lineTo(L * 0.7, -H * 1.15); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(L * 0.58, -H * 1.7); ctx.lineTo(L * 0.62, -H * 2.0); ctx.stroke();
+  ctx.lineCap = 'butt';
+  // 龙须
+  ctx.strokeStyle = shade(sp.c2, f.hueShift + 8);
+  ctx.lineWidth = Math.max(1, s * 0.05);
+  ctx.beginPath(); ctx.moveTo(L * 0.95, -H * 0.1);
+  ctx.quadraticCurveTo(L * 1.3, H * 0.5 + Math.sin(time * 4) * H * 0.3, L * 1.45, H * 0.9 + Math.sin(time * 4) * H * 0.5);
+  ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(L * 0.95, H * 0.05);
+  ctx.quadraticCurveTo(L * 1.3, -H * 0.4 + Math.cos(time * 4) * H * 0.3, L * 1.45, -H * 0.8 + Math.cos(time * 4) * H * 0.5);
+  ctx.stroke();
+  // 眼
+  vipEye(L * 0.72, -H * 0.35, s * 0.2, sp.eye);
+}
+
+/* ---- 机械鲨鱼：金属装甲板 + 红扫描眼 + 铆钉 ---- */
+function drawMechShark(sp, s, f, time, wag) {
+  const L = 1.5 * s, H = 0.72 * s;
+  ctx.save();
+  ctx.shadowColor = sp.glow; ctx.shadowBlur = s * 0.45;
+  const grad = ctx.createLinearGradient(0, -H, 0, H);
+  grad.addColorStop(0, shade(sp.c2, f.hueShift));
+  grad.addColorStop(0.5, shade(sp.c1, f.hueShift));
+  grad.addColorStop(1, shade(sp.belly, f.hueShift));
+  ctx.fillStyle = grad;
+  // 鲨形金属身
+  ctx.beginPath();
+  ctx.moveTo(L, 0);
+  ctx.quadraticCurveTo(0, -H, -L, 0);
+  ctx.quadraticCurveTo(0, H, L, 0);
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+  // 背鳍（梯形装甲板）
+  ctx.fillStyle = shade(sp.c2, f.hueShift - 8);
+  ctx.beginPath(); ctx.moveTo(-L * 0.15, -H * 0.7); ctx.lineTo(L * 0.05, -H * 1.75); ctx.lineTo(L * 0.48, -H * 0.6); ctx.closePath(); ctx.fill();
+  // 侧鳍
+  ctx.beginPath(); ctx.moveTo(L * 0.05, H * 0.5); ctx.lineTo(-L * 0.3, H * 1.4); ctx.lineTo(L * 0.32, H * 0.8); ctx.closePath(); ctx.fill();
+  // 装甲板分割线
+  ctx.strokeStyle = 'rgba(20,30,40,.55)';
+  ctx.lineWidth = Math.max(1, s * 0.035);
+  ctx.beginPath();
+  ctx.moveTo(-L * 0.1, -H * 0.55); ctx.quadraticCurveTo(0, -H * 0.15, -L * 0.1, H * 0.55);
+  ctx.moveTo(L * 0.25, -H * 0.5); ctx.quadraticCurveTo(L * 0.35, 0, L * 0.25, H * 0.5);
+  ctx.stroke();
+  // 铆钉
+  ctx.fillStyle = 'rgba(230,240,250,.7)';
+  for (let i = 0; i < 4; i++) {
+    const t = -0.4 + i * 0.25;
+    ctx.beginPath(); ctx.arc(L * t, -H * 0.28, Math.max(1, s * 0.035), 0, TAU); ctx.fill();
+    ctx.beginPath(); ctx.arc(L * t, H * 0.28, Math.max(1, s * 0.035), 0, TAU); ctx.fill();
+  }
+  // 红扫描眼（发光横条）
+  const ex = L * 0.5, ey = -H * 0.1, er = s * 0.22;
+  ctx.save();
+  ctx.shadowColor = sp.eye; ctx.shadowBlur = s * 0.4;
+  ctx.fillStyle = sp.eye;
+  ctx.beginPath();
+  ctx.ellipse(ex, ey, er * 0.9, er * 0.28, 0, 0, TAU);
+  ctx.fill();
+  ctx.restore();
+  ctx.fillStyle = 'rgba(255,255,255,.85)';
+  ctx.beginPath(); ctx.ellipse(ex + er * 0.5, ey, er * 0.22, er * 0.12, 0, 0, TAU); ctx.fill();
+}
+
+/* ---- 星空水母：半透明伞盖 + 星云纹理 + 飘动触须 ---- */
+function drawJelly(sp, s, f, time, wag) {
+  const L = 1.35 * s, H = 0.8 * s;
+  ctx.save();
+  ctx.globalAlpha = 0.82;
+  ctx.shadowColor = sp.glow; ctx.shadowBlur = s * 0.5;
+  const grad = ctx.createLinearGradient(0, -H, 0, H);
+  grad.addColorStop(0, shade(sp.c2, f.hueShift));
+  grad.addColorStop(0.55, shade(sp.c1, f.hueShift));
+  grad.addColorStop(1, shade(sp.belly, f.hueShift));
+  ctx.fillStyle = grad;
+  // 伞盖（前部圆顶 + 平缓后缘）
+  ctx.beginPath();
+  ctx.moveTo(L, 0);
+  ctx.quadraticCurveTo(L * 0.7, -H * 1.5, -L * 0.5, -H * 0.9);
+  ctx.quadraticCurveTo(-L * 0.9, -H * 0.55, -L * 0.8, H * 0.1);
+  ctx.quadraticCurveTo(-L * 0.7, H * 0.7, -L * 0.1, H * 0.75);
+  ctx.quadraticCurveTo(L * 0.5, H * 0.7, L, 0);
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+  // 星云纹理（伞盖内发光点）
+  ctx.save();
+  ctx.globalAlpha = 0.9;
+  for (let i = 0; i < 7; i++) {
+    const a = i * 0.9 + 0.3;
+    const px = L * (0.5 - (i % 4) * 0.22);
+    const py = -H * (0.4 + (i % 3) * 0.3) + Math.sin(time * 2 + i) * H * 0.06;
+    const tw = 0.5 + 0.5 * Math.sin(time * 3 + i * 1.7);
+    ctx.fillStyle = 'rgba(255,255,255,' + (0.25 + tw * 0.4) + ')';
+    ctx.beginPath(); ctx.arc(px, py, Math.max(1, s * 0.05), 0, TAU); ctx.fill();
+  }
+  ctx.restore();
+  // 触须（飘动）
+  ctx.strokeStyle = shade(sp.c1, f.hueShift + 10);
+  ctx.lineWidth = Math.max(1, s * 0.045); ctx.lineCap = 'round';
+  for (let i = 0; i < 5; i++) {
+    const tx = L * (0.7 - i * 0.35);
+    const wob = Math.sin(time * 3 + i * 1.2) * H * 0.35;
+    ctx.beginPath();
+    ctx.moveTo(tx, H * 0.5);
+    ctx.quadraticCurveTo(tx - H * 0.2, H * 0.9 + wob, tx - H * 0.4, H * 1.5 + wob * 1.5);
+    ctx.stroke();
+  }
+  ctx.lineCap = 'butt';
+  // 眼
+  vipEye(L * 0.55, -H * 0.35, s * 0.18, sp.eye);
+}
+
+/* ---- 恶魔鳐：黑色蝠鲼宽体 + 红魔纹 + 尖角 + 尾鞭 ---- */
+function drawDemonRay(sp, s, f, time, wag) {
+  const L = 1.9 * s, H = 0.85 * s;
+  ctx.save();
+  ctx.shadowColor = sp.glow; ctx.shadowBlur = s * 0.5;
+  const grad = ctx.createLinearGradient(0, -H, 0, H);
+  grad.addColorStop(0, shade(sp.c1, f.hueShift));
+  grad.addColorStop(0.5, shade(sp.c2, f.hueShift));
+  grad.addColorStop(1, shade(sp.belly, f.hueShift));
+  ctx.fillStyle = grad;
+  // 宽体蝠鲼（菱形翅膀）
+  ctx.beginPath();
+  ctx.moveTo(L, 0);
+  ctx.quadraticCurveTo(L * 0.5, -H * 1.4, -L * 0.6, -H * 1.25);
+  ctx.quadraticCurveTo(-L * 1.05, -H * 0.3, -L * 0.7, 0);
+  ctx.quadraticCurveTo(-L * 1.05, H * 0.3, -L * 0.6, H * 1.25);
+  ctx.quadraticCurveTo(L * 0.5, H * 1.4, L, 0);
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+  // 尖角（恶魔双角）
+  ctx.fillStyle = shade(sp.c2, f.hueShift - 8);
+  ctx.beginPath(); ctx.moveTo(L * 0.55, -H * 0.5); ctx.lineTo(L * 0.72, -H * 1.5); ctx.lineTo(L * 0.85, -H * 0.45); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(L * 0.6, -H * 0.35); ctx.lineTo(L * 0.8, -H * 1.15); ctx.lineTo(L * 0.95, -H * 0.3); ctx.closePath(); ctx.fill();
+  // 红魔纹（沿翅膀发光的折线）
+  ctx.save();
+  ctx.shadowColor = sp.glow; ctx.shadowBlur = s * 0.3;
+  ctx.strokeStyle = sp.eye; ctx.lineWidth = Math.max(1, s * 0.045);
+  ctx.beginPath();
+  ctx.moveTo(L * 0.7, 0);
+  ctx.quadraticCurveTo(L * 0.3, -H * 0.5, L * 0.1, -H * 1.0);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(L * 0.7, 0);
+  ctx.quadraticCurveTo(L * 0.3, H * 0.5, L * 0.1, H * 1.0);
+  ctx.stroke();
+  ctx.restore();
+  // 尾鞭（长尾）
+  ctx.strokeStyle = shade(sp.c2, f.hueShift - 5);
+  ctx.lineWidth = Math.max(1.2, s * 0.05); ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(-L * 0.85, 0);
+  ctx.quadraticCurveTo(-L * 1.2, Math.sin(time * 4) * H * 0.3, -L * 1.5, Math.sin(time * 4 + 1) * H * 0.5);
+  ctx.stroke(); ctx.lineCap = 'butt';
+  // 眼
+  vipEye(L * 0.55, -H * 0.25, s * 0.16, sp.eye);
+}
+
+/* ---- 极光海龟：圆顶龟壳 + 极光流动纹理 + 发光背鳍 ---- */
+function drawTurtle(sp, s, f, time, wag) {
+  const L = 1.5 * s, H = 0.8 * s;
+  // 头部 + 前鳍
+  ctx.fillStyle = shade(sp.c1, f.hueShift + 4);
+  ctx.beginPath(); ctx.ellipse(L * 0.75, 0, s * 0.34, s * 0.26, 0, 0, TAU); ctx.fill();
+  // 前后鳍（划水摆动）
+  const fl = Math.sin(time * 3) * H * 0.3;
+  ctx.fillStyle = shade(sp.c2, f.hueShift - 4);
+  ctx.beginPath(); ctx.ellipse(-L * 0.1, H * 0.85, s * 0.4, s * 0.18, 0.5 + fl * 0.3, 0, TAU); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(-L * 0.55, H * 0.85, s * 0.35, s * 0.16, 0.5 - fl * 0.3, 0, TAU); ctx.fill();
+  // 龟壳圆顶
+  ctx.save();
+  ctx.shadowColor = sp.glow; ctx.shadowBlur = s * 0.45;
+  const grad = ctx.createLinearGradient(0, -H, 0, H);
+  grad.addColorStop(0, shade(sp.c2, f.hueShift));
+  grad.addColorStop(0.6, shade(sp.c1, f.hueShift));
+  grad.addColorStop(1, shade(sp.belly, f.hueShift));
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.moveTo(-L * 0.7, H * 0.4);
+  ctx.quadraticCurveTo(-L * 0.8, -H * 1.1, 0, -H * 1.1);
+  ctx.quadraticCurveTo(L * 0.8, -H * 1.1, L * 0.7, H * 0.4);
+  ctx.quadraticCurveTo(0, H * 0.7, -L * 0.7, H * 0.4);
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+  // 极光流动纹理（time 驱动横向渐变扫过龟壳）
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(-L * 0.7, H * 0.4);
+  ctx.quadraticCurveTo(-L * 0.8, -H * 1.1, 0, -H * 1.1);
+  ctx.quadraticCurveTo(L * 0.8, -H * 1.1, L * 0.7, H * 0.4);
+  ctx.quadraticCurveTo(0, H * 0.7, -L * 0.7, H * 0.4);
+  ctx.closePath(); ctx.clip();
+  const sweep = ((time * 1.2 % 2) - 1) * L * 2.2;
+  const ag = ctx.createLinearGradient(sweep - L, 0, sweep + L, 0);
+  ag.addColorStop(0, 'rgba(90,216,255,0)');
+  ag.addColorStop(0.5, 'rgba(140,255,220,.85)');
+  ag.addColorStop(1, 'rgba(200,120,255,0)');
+  ctx.fillStyle = ag;
+  ctx.fillRect(-L * 2, -H * 2, L * 4, H * 4);
+  ctx.restore();
+  // 发光背鳍
+  ctx.save();
+  ctx.shadowColor = sp.glow; ctx.shadowBlur = s * 0.4;
+  ctx.fillStyle = 'rgba(160,240,255,.8)';
+  ctx.beginPath(); ctx.moveTo(-L * 0.1, -H * 0.95); ctx.lineTo(L * 0.02, -H * 1.5); ctx.lineTo(L * 0.16, -H * 0.95); ctx.closePath(); ctx.fill();
+  ctx.restore();
+  // 眼
+  vipEye(L * 0.82, -H * 0.15, s * 0.16, sp.eye);
+}
+
+/* ---- 黄金鲨王：黄金质感鲨身 + 皇冠 + 强反光 ---- */
+function drawGoldKing(sp, s, f, time, wag) {
+  const L = 1.55 * s, H = 0.72 * s;
+  ctx.save();
+  ctx.shadowColor = sp.glow; ctx.shadowBlur = s * 0.55;
+  const grad = ctx.createLinearGradient(0, -H, 0, H);
+  grad.addColorStop(0, shade(sp.c2, f.hueShift));
+  grad.addColorStop(0.45, shade(sp.c1, f.hueShift));
+  grad.addColorStop(1, shade(sp.belly, f.hueShift));
+  ctx.fillStyle = grad;
+  // 鲨身
+  ctx.beginPath();
+  ctx.moveTo(L, 0);
+  ctx.quadraticCurveTo(0, -H, -L, 0);
+  ctx.quadraticCurveTo(0, H, L, 0);
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+  // 背鳍 + 侧鳍
+  ctx.fillStyle = shade(sp.c2, f.hueShift - 10);
+  ctx.beginPath(); ctx.moveTo(-L * 0.15, -H * 0.72); ctx.lineTo(L * 0.05, -H * 1.75); ctx.lineTo(L * 0.48, -H * 0.62); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(L * 0.05, H * 0.5); ctx.lineTo(-L * 0.3, H * 1.4); ctx.lineTo(L * 0.32, H * 0.8); ctx.closePath(); ctx.fill();
+  // 强反光（顶部白色高光带）
+  ctx.save();
+  ctx.beginPath(); ctx.moveTo(L, 0); ctx.quadraticCurveTo(0, -H, -L, 0); ctx.quadraticCurveTo(0, H, L, 0); ctx.closePath(); ctx.clip();
+  const hg = ctx.createLinearGradient(0, -H, 0, H * 0.2);
+  hg.addColorStop(0, 'rgba(255,255,255,.75)');
+  hg.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = hg;
+  ctx.fillRect(-L, -H, L * 2, H * 1.4);
+  ctx.restore();
+  // 皇冠（三尖 + 宝石）
+  ctx.save();
+  ctx.shadowColor = sp.glow; ctx.shadowBlur = s * 0.3;
+  ctx.fillStyle = '#ffe08a';
+  ctx.beginPath();
+  ctx.moveTo(L * 0.28, -H * 0.9);
+  ctx.lineTo(L * 0.28, -H * 1.7);
+  ctx.lineTo(L * 0.42, -H * 1.15);
+  ctx.lineTo(L * 0.55, -H * 1.8);
+  ctx.lineTo(L * 0.68, -H * 1.1);
+  ctx.lineTo(L * 0.8, -H * 0.85);
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+  ctx.fillStyle = '#ff2b4a';
+  ctx.beginPath(); ctx.arc(L * 0.55, -H * 1.25, s * 0.07, 0, TAU); ctx.fill();
+  // 眼
+  vipEye(L * 0.5, -H * 0.14, s * 0.19, sp.eye);
+}
+
+/* ============================================================
+   专属特效层（全部 time + 固定相位驱动，避免每帧随机闪烁）
+   ============================================================ */
+// 拖尾：尾后残影
+function fxTrail(sp, s, f, time) {
+  const L = 1.5 * s, H = 0.65 * s;
+  for (let i = 1; i <= 4; i++) {
+    const a = 0.28 * (1 - i / 5);
+    const ox = -L * 0.3 * i - Math.sin(time * 5) * s * 0.1;
+    ctx.save();
+    ctx.globalAlpha = a;
+    ctx.fillStyle = sp.glow;
+    ctx.beginPath(); ctx.ellipse(-L * 0.6 + ox * 0.3, 0, L * 0.55 * (1 - i * 0.12), H * (1 - i * 0.12), 0, 0, TAU); ctx.fill();
+    ctx.restore();
+  }
+}
+
+// 推进器：尾后光焰喷射
+function fxThruster(sp, s, f, time) {
+  const L = 1.5 * s, H = 0.72 * s;
+  const flick = 0.75 + 0.25 * Math.sin(time * 22);
+  ctx.save();
+  ctx.shadowColor = sp.glow; ctx.shadowBlur = s * 0.5;
+  const g = ctx.createLinearGradient(-L * 0.85, 0, -L * 1.6, 0);
+  g.addColorStop(0, 'rgba(255,255,255,.9)');
+  g.addColorStop(0.3, 'rgba(255,150,60,.9)');
+  g.addColorStop(1, 'rgba(255,40,40,0)');
+  ctx.fillStyle = g;
+  ctx.beginPath();
+  ctx.moveTo(-L * 0.85, -H * 0.35 * flick);
+  ctx.lineTo(-L * 1.6, 0);
+  ctx.lineTo(-L * 0.85, H * 0.35 * flick);
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+
+// 星尘：环绕星点
+function fxStardust(sp, s, f, time) {
+  const R = s * 1.15;
+  for (let i = 0; i < 8; i++) {
+    const a = i / 8 * TAU + time * 0.9;
+    const rr = R * (0.6 + 0.4 * Math.sin(time * 2 + i * 1.3));
+    const px = Math.cos(a) * rr, py = Math.sin(a) * rr * 0.7;
+    const tw = 0.5 + 0.5 * Math.sin(time * 4 + i * 2.1);
+    ctx.save();
+    ctx.globalAlpha = 0.4 + tw * 0.5;
+    ctx.fillStyle = sp.glow;
+    ctx.beginPath(); ctx.arc(px, py, Math.max(1, s * 0.05 * (0.5 + tw)), 0, TAU); ctx.fill();
+    ctx.restore();
+  }
+}
+
+// 火焰：身体周围升腾火苗
+function fxFlame(sp, s, f, time) {
+  const L = 1.5 * s, H = 0.72 * s;
+  for (let i = 0; i < 6; i++) {
+    const t = (i / 6) * 2 - 1;               // -1 .. 1 沿身体
+    const px = L * t;
+    const lift = (time * 1.6 + i * 0.35) % 1;
+    const py = H * (0.6 + lift * 0.9);
+    const sz = s * (0.12 + 0.1 * Math.sin(time * 6 + i)) * (1 - lift * 0.6);
+    ctx.save();
+    ctx.globalAlpha = 0.5 * (1 - lift);
+    ctx.fillStyle = lift < 0.5 ? '#ff8a3a' : '#ff2b2b';
+    ctx.beginPath(); ctx.arc(px, py, Math.max(0.5, sz), 0, TAU); ctx.fill();
+    ctx.restore();
+  }
+}
+
+// 冰晶：漂浮雪花晶体
+function fxIce(sp, s, f, time) {
+  for (let i = 0; i < 7; i++) {
+    const a = i / 7 * TAU + time * 0.5;
+    const rr = s * (0.7 + 0.5 * Math.sin(time * 1.8 + i * 2.4));
+    const px = Math.cos(a) * rr, py = Math.sin(a) * rr * 0.7 - s * 0.2;
+    const tw = 0.5 + 0.5 * Math.sin(time * 3 + i * 1.9);
+    ctx.save();
+    ctx.globalAlpha = 0.4 + tw * 0.5;
+    ctx.strokeStyle = '#d6f4ff'; ctx.fillStyle = 'rgba(214,244,255,.9)';
+    ctx.lineWidth = Math.max(1, s * 0.02);
+    const cs = Math.max(1.5, s * 0.09 * (0.6 + tw * 0.4));
+    // 六角雪花
+    ctx.beginPath();
+    for (let k = 0; k < 6; k++) {
+      const ang = k / 6 * TAU;
+      const x1 = Math.cos(ang) * cs, y1 = Math.sin(ang) * cs;
+      if (k === 0) ctx.moveTo(px + x1, py + y1); else ctx.lineTo(px + x1, py + y1);
+    }
+    ctx.closePath(); ctx.fill();
+    ctx.restore();
+  }
+}
+
+// 光环：身后同心光轮
+function fxHalo(sp, s, f, time) {
+  const L = 1.55 * s;
+  for (let i = 0; i < 3; i++) {
+    const rr = s * (0.9 + i * 0.18) + Math.sin(time * 2 + i) * s * 0.04;
+    ctx.save();
+    ctx.globalAlpha = 0.5 - i * 0.13;
+    ctx.strokeStyle = sp.glow;
+    ctx.lineWidth = Math.max(1, s * 0.05 * (1 - i * 0.25));
+    ctx.beginPath(); ctx.arc(-L * 0.4, 0, rr, 0, TAU); ctx.stroke();
+    ctx.restore();
+  }
 }
 
 /* ---- 海底氛围元素：海草 / 珊瑚 / 气泡 / 拖尾 ---- */
@@ -1147,17 +2682,26 @@ function drawBubbles() {
 function drawTrail(f) {
   const tr = f.trail;
   if (!tr || tr.length < 2) return;
-  for (let i = 0; i < tr.length; i++) {
+  const q = Perf.quality;
+  // 画质降级：中画质隔点采样降拖尾，低画质直接关闭拖尾
+  const step = q === 0 ? 1 : (q === 1 ? 2 : 0);
+  if (step === 0) return;
+  const alphaMul = q === 1 ? 0.6 : 1;
+  for (let i = 0; i < tr.length; i += step) {
     const p = tr[i], k = i / tr.length;
-    ctx.globalAlpha = k * k * 0.2;
+    ctx.globalAlpha = k * k * 0.2 * alphaMul;
     ctx.fillStyle = f.species.c1;
     ctx.beginPath(); ctx.arc(p.x, p.y, f.size * 0.45 * k, 0, TAU); ctx.fill();
   }
   ctx.globalAlpha = 1;
 }
 
-function drawBackground() {
-  // 明亮清新水体渐变（上部浅，向下渐深，非纯色单调）
+// 远景静态背景缓存：水体渐变/礁石/珊瑚/远景海草渲染一次到 bgLayer，避免每帧重复绘制
+function buildBackground() {
+  if (!bgCtx || W === 0 || H === 0) return;
+  const savedCtx = ctx;
+  ctx = bgCtx;
+  ctx.clearRect(0, 0, W, H);
   const g = ctx.createLinearGradient(0, 0, 0, H);
   g.addColorStop(0, '#6fd4f0');
   g.addColorStop(0.28, '#3fb6de');
@@ -1166,8 +2710,16 @@ function drawBackground() {
   g.addColorStop(1, '#0a5a8c');
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, W, H);
+  drawDistantReef();
+  drawSeaweed('back');
+  ctx = savedCtx;
+}
 
-  // 阳光光束（缓缓移动）
+function drawBackground() {
+  // 直接贴缓存背景（水体渐变 + 远景礁石珊瑚 + 远景海草）
+  ctx.drawImage(bgLayer, 0, 0, W, H);
+
+  // 阳光光束（缓缓移动，保持动画，成本低）
   ctx.save();
   ctx.globalAlpha = 0.12;
   for (let i = 0; i < 5; i++) {
@@ -1180,17 +2732,15 @@ function drawBackground() {
     ctx.closePath(); ctx.fill();
   }
   ctx.restore();
-
-  // 远处礁石珊瑚 + 远处海草（景深）
-  drawDistantReef();
-  drawSeaweed('back');
 }
 
 function drawScene() {
   // 鱼（小的在下层，带拖尾）
   const drawList = [...Game.fishes.filter(f => f.alive), ...Game.players.filter(p => p.alive)];
   drawList.sort((a, b) => a.size - b.size);
+  const margin = 80;   // 屏幕外剔除：完全移出视野的鱼不绘制，省掉离屏合成/贴图开销
   for (const f of drawList) {
+    if (f.x < -margin || f.x > W + margin || f.y < -margin || f.y > H + margin) continue;
     drawTrail(f);
     drawFishBody(f, Game.time);
   }
@@ -1332,12 +2882,23 @@ function roundRect(x, y, w, h, r) {
    ============================================================ */
 let lastT = performance.now();
 let ambientT = 0;
+let homeAnimT = 0;
+let homeAcc = 0;
+const homeEl = document.getElementById('home');
 function loop(now) {
   const dt = (now - lastT) / 1000;
   lastT = now;
   const adt = Math.min(dt, 0.05);
   ambientT += adt;
+  Perf.tick(adt);   // FPS 采样 + 画质档位刷新（每 0.5s 一次）
   Game.updateBubbles(adt);
+
+  // 主页大厅待机游动动画：独立降频到 30fps，不和对局渲染抢资源
+  if (Game.state !== 'play' && Game.state !== 'pause' && !homeEl.classList.contains('hidden')) {
+    homeAnimT += adt;
+    homeAcc += adt;
+    if (homeAcc >= 1 / 30) { homeAcc = 0; Game.renderHomeChar(homeAnimT); }
+  }
 
   drawBackground();
   drawBubbles();
@@ -1361,6 +2922,27 @@ document.getElementById('btnConfirm').addEventListener('click', () => Game.confi
 document.getElementById('btnSelectBack').addEventListener('click', () => Game.toMenu());
 document.getElementById('btnPickP1').addEventListener('click', () => Game.setSelectPlayer(0));
 document.getElementById('btnPickP2').addEventListener('click', () => Game.setSelectPlayer(1));
+document.getElementById('btnAlbum').addEventListener('click', () => Game.openAlbum());
+document.getElementById('btnAlbumClose').addEventListener('click', () => Game.closeAlbum());
+document.getElementById('btnStart').addEventListener('click', () => Game.goStart());
+document.getElementById('btnBackpack').addEventListener('click', () => Game.openBackpack());
+document.getElementById('btnBackpackBack').addEventListener('click', () => Game.closeBackpack());
+document.getElementById('btnAlbumHome').addEventListener('click', () => Game.openAlbum());
+document.getElementById('btnDiy').addEventListener('click', () => Game.openDiy());
+document.getElementById('btnDiyBack').addEventListener('click', () => Game.closeDiy());
+document.getElementById('btnDiySave').addEventListener('click', () => Game.saveDiy(false));
+document.getElementById('btnDiyEquip').addEventListener('click', () => Game.saveDiy(true));
+document.getElementById('tabOfficial').addEventListener('click', () => Game.setAlbumTab('official'));
+document.getElementById('tabDiy').addEventListener('click', () => Game.setAlbumTab('diy'));
+document.getElementById('homeNick').addEventListener('click', () => Game.openNickname());
+document.getElementById('btnNickSave').addEventListener('click', () => Game.saveNickname());
+document.getElementById('btnNickBack').addEventListener('click', () => Game.closeNickname());
+document.getElementById('btnVipShop').addEventListener('click', () => Game.openVipShop());
+document.getElementById('btnQuest').addEventListener('click', () => Game.openQuest());
+document.getElementById('btnMail').addEventListener('click', () => Game.openMail());
+document.getElementById('btnVipShopBack').addEventListener('click', () => Game.closeVipShop());
+document.getElementById('btnQuestBack').addEventListener('click', () => Game.closeQuest());
+document.getElementById('btnMailBack').addEventListener('click', () => Game.closeMail());
 
 /* ---------- 按钮水波纹点击反馈 ---------- */
 function attachRipple() {
@@ -1382,8 +2964,17 @@ attachRipple();
 
 /* ---------- 启动 ---------- */
 Game.init();
-Game.showMenu(true);
+buildBackground();   // 首帧前预渲染远景静态背景到离屏缓存（避免 resize 首次调用时 corals 未初始化）
+Game.showHome(true);
+Game.updateHomeStats();
 requestAnimationFrame(loop);
+
+// 抖音云端存档：异步登录 + 拉取（不阻塞本地进入，无 tt 环境静默降级）
+Cloud.login().then(() => Cloud.pull());
+
+// 关闭 / 切后台时同步一次云端存档（配合 openHome/endGame 的同步时机，避免频繁请求）
+document.addEventListener('visibilitychange', () => { if (document.hidden) Cloud.syncNow(); });
+window.addEventListener('beforeunload', () => Cloud.syncNow());
 </script>
 </body>
 </html>
