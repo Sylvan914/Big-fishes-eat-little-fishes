@@ -1,0 +1,9 @@
+{
+  "name": "save",
+  "version": "1.0.0",
+  "description": "大鱼吃小鱼 玩家存档云函数（云端 + 本地双缓存）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

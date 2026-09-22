@@ -1,0 +1,27 @@
+{
+  "appid": "tt_此处填写你的AppID",
+  "projectname": "开局捏鱼吞遍深海",
+  "compileType": "game",
+  "libVersion": "4.27",
+  "setting": {
+    "es6": true,
+    "enhance": true,
+    "postcss": false,
+    "minified": true,
+    "urlCheck": false,
+    "ignoreDevUnusedFiles": false,
+    "ignoreUploadUnusedFiles": false
+  },
+  "condition": {},
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  },
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "__AppID获取方式__": "在抖音开发者工具左侧点「项目」→ 用抖音App扫码登录 → 若未创建过小游戏，在抖音开放平台 developer.open-douyin.com 完成个人开发者认证并创建小游戏，AppID 形如 tt 开头的一串字符；创建后回到工具把上面 appid 替换为真实值（去掉 tt_ 前缀）",
+  "__导入步骤__": "打开抖音开发者工具 → 导入项目 → 选择本 minigame 目录 → 填入你的 AppID → 点确定即可编译预览",
+  "__libVersion说明__": "已固定为基础库稳定版 4.27。若开发者工具提示该版本不存在/已下架，请到「详情 → 本地设置 → 调试基础库」选一个可用稳定版本，替换上面的 libVersion 数值即可"
+}

@@ -3,40 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>大鱼吃小鱼</title>
+<title>开局捏鱼，吞遍深海</title>
 <style>
-  :root{ --sea1:#54c6e8; --sea2:#0d6ea3; --deep:#0a3d63; }
+  :root{ --sea1:#54c6e8; --sea2:#0d6ea3; --deep:#0a3d63; --cyan:#00e5ff; --orange:#ff7a1a; --orange-hot:#ff4d00; --ink:#02131f; }
   *{margin:0;padding:0;box-sizing:border-box}
-  html,body{width:100%;height:100%;overflow:hidden;background:#0b5f8f;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;user-select:none;-webkit-user-select:none;touch-action:none}
+  html,body{width:100%;height:100%;overflow:hidden;background:#02131f;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;user-select:none;-webkit-user-select:none;touch-action:none}
   #game{display:block;position:absolute;inset:0}
 
   .overlay{
     position:absolute;inset:0;display:flex;flex-direction:column;
     align-items:center;justify-content:center;gap:16px;
     color:#eaf6ff;text-align:center;z-index:10;padding:18px;
-    background:radial-gradient(ellipse at 50% 12%, rgba(64,180,220,.22), rgba(6,42,72,.56));
+    background:radial-gradient(ellipse at 50% 12%, rgba(0,140,210,.28), rgba(2,14,28,.66)), radial-gradient(ellipse at 50% 110%, rgba(255,90,20,.18), rgba(2,10,20,.4));
     -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);
     transition:opacity .3s ease;
   }
   .overlay.hidden{opacity:0;pointer-events:none}
   h1.title{
-    font-size:clamp(40px,10vw,68px);letter-spacing:4px;font-weight:900;
-    background:linear-gradient(180deg,#ffffff,#aef0ff 50%,#42c4ff);
+    font-size:clamp(46px,11vw,80px);letter-spacing:6px;font-weight:900;
+    background:linear-gradient(180deg,#ffffff,#ffe0b0 28%,#ff8a1a 58%,#00e5ff 92%);
     -webkit-background-clip:text;background-clip:text;color:transparent;
-    filter:drop-shadow(0 4px 18px rgba(0,180,255,.45));
+    filter:drop-shadow(0 4px 20px rgba(0,229,255,.55)) drop-shadow(0 2px 2px rgba(0,0,0,.7));
+    animation:titlePulse 2.6s ease-in-out infinite;
   }
-  .subtitle{font-size:15px;color:#dff6ff;letter-spacing:2px;margin-top:-8px;text-shadow:0 1px 4px rgba(0,28,50,.55)}
+  @keyframes titlePulse{0%,100%{filter:drop-shadow(0 4px 20px rgba(0,229,255,.55)) drop-shadow(0 2px 2px rgba(0,0,0,.7))}50%{filter:drop-shadow(0 4px 34px rgba(255,122,26,.85)) drop-shadow(0 2px 2px rgba(0,0,0,.7))}}
+  .subtitle{font-size:17px;color:#ffe6c4;letter-spacing:3px;margin-top:-6px;font-weight:800;text-shadow:0 0 14px rgba(255,122,26,.65), 0 2px 4px rgba(0,0,0,.65)}
   .btn{
     position:relative;overflow:hidden;
-    min-width:230px;padding:15px 32px;font-size:20px;font-weight:800;letter-spacing:3px;
-    color:#fff;border:none;border-radius:999px;cursor:pointer;
-    background:linear-gradient(135deg,#35c0ff,#0a86e8);
-    box-shadow:0 8px 22px rgba(0,150,255,.45), inset 0 2px 0 rgba(255,255,255,.35), inset 0 -3px 0 rgba(0,40,90,.18);
-    transition:transform .14s ease, box-shadow .14s ease, filter .14s ease;
+    min-width:250px;padding:18px 38px;font-size:22px;font-weight:900;letter-spacing:4px;
+    color:#fff;border:none;border-radius:16px;cursor:pointer;
+    background:linear-gradient(135deg,#00e5ff,#0a6be8 55%,#5a2dff);
+    box-shadow:0 10px 0 #063a6e, 0 20px 36px rgba(0,229,255,.5), inset 0 2px 0 rgba(255,255,255,.55);
+    text-shadow:0 2px 3px rgba(0,18,38,.75);
+    transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
   }
-  .btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 14px 30px rgba(0,160,255,.6), inset 0 2px 0 rgba(255,255,255,.4), inset 0 -3px 0 rgba(0,40,90,.18)}
-  .btn:active{transform:translateY(1px) scale(.98);box-shadow:0 4px 12px rgba(0,150,255,.4), inset 0 2px 0 rgba(255,255,255,.3)}
-  .btn.secondary{background:linear-gradient(135deg,#3ee08a,#0fb56a);box-shadow:0 8px 22px rgba(0,220,130,.4), inset 0 2px 0 rgba(255,255,255,.35), inset 0 -3px 0 rgba(0,80,40,.18)}
+  .btn:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 14px 0 #063a6e, 0 26px 46px rgba(0,229,255,.7), inset 0 2px 0 rgba(255,255,255,.6)}
+  .btn:active{transform:translateY(4px) scale(.98);box-shadow:0 6px 0 #063a6e, 0 10px 20px rgba(0,229,255,.5), inset 0 2px 0 rgba(255,255,255,.4);animation:btnShake .3s}
+  @keyframes btnShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px) rotate(-1deg)}75%{transform:translateX(4px) rotate(1deg)}}
+  .btn.secondary{background:linear-gradient(135deg,#3ee08a,#0fb56a);box-shadow:0 10px 0 #065c36, 0 20px 36px rgba(0,220,130,.45), inset 0 2px 0 rgba(255,255,255,.55)}
   .btn.ghost{background:rgba(255,255,255,.10);box-shadow:inset 0 0 0 2px rgba(255,255,255,.30)}
   .btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none;filter:grayscale(.5)}
   .btn-mini{min-width:0;padding:9px 20px;font-size:15px;letter-spacing:1px}
@@ -87,7 +91,7 @@
 
   /* ---- 主页 / 背包 / DIY 面板 ---- */
   #home,#backpack,#diy{overflow-y:auto;padding:18px}
-  #home{background:radial-gradient(ellipse at 50% 28%, rgba(44,168,218,.32), rgba(4,30,60,.74));overflow-y:auto}
+  #home{background:radial-gradient(ellipse at 50% 24%, rgba(0,140,210,.30), rgba(2,14,28,.78)), radial-gradient(ellipse at 50% 115%, rgba(255,90,20,.16), rgba(2,10,20,.4));overflow-y:auto}
   .home-deco{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:-1}
   .home-float{position:absolute;width:30px;height:18px;border-radius:50%;opacity:.55;
     background:radial-gradient(circle at 38% 42%, #cff2ff, #34a6d8 72%);
@@ -106,11 +110,12 @@
     padding:8px 22px;border-radius:999px;background:linear-gradient(135deg,rgba(53,192,255,.9),rgba(10,134,232,.9));
     box-shadow:0 6px 16px rgba(0,150,255,.4), inset 0 2px 0 rgba(255,255,255,.35)}
   .home-nick::after{content:'✎';margin-left:8px;font-size:13px;opacity:.85}
-  .start-big{min-width:min(340px,84vw);padding:20px 40px;font-size:26px;letter-spacing:6px;
-    background:linear-gradient(135deg,#4ad0ff,#0a86e8 60%,#6b3aff);
-    box-shadow:0 12px 34px rgba(0,160,255,.6), inset 0 3px 0 rgba(255,255,255,.4), inset 0 -4px 0 rgba(0,30,90,.2);
-    animation:pulse 2.4s ease-in-out infinite;z-index:2}
-  @keyframes pulse{0%,100%{box-shadow:0 12px 34px rgba(0,160,255,.6), inset 0 3px 0 rgba(255,255,255,.4), inset 0 -4px 0 rgba(0,30,90,.2)}50%{box-shadow:0 12px 46px rgba(120,80,255,.85), inset 0 3px 0 rgba(255,255,255,.45), inset 0 -4px 0 rgba(0,30,90,.2)}}
+  .start-big{min-width:min(340px,84vw);padding:24px 44px;font-size:30px;letter-spacing:7px;
+    background:linear-gradient(135deg,#ffc46b,#ff8a1a 55%,#ff4d00);
+    box-shadow:0 12px 0 #8a2a00, 0 22px 44px rgba(255,122,26,.65), inset 0 3px 0 rgba(255,255,255,.55);
+    text-shadow:0 2px 4px rgba(90,20,0,.7);
+    animation:pulse 1.8s ease-in-out infinite;z-index:2}
+  @keyframes pulse{0%,100%{box-shadow:0 12px 0 #8a2a00, 0 22px 44px rgba(255,122,26,.65), inset 0 3px 0 rgba(255,255,255,.55)}50%{box-shadow:0 12px 0 #8a2a00, 0 26px 60px rgba(255,80,20,.95), inset 0 3px 0 rgba(255,255,255,.6)}}
   .home-stats{margin-top:2px;font-size:14px;color:#bfe9f7;background:rgba(8,50,82,.5);padding:8px 18px;border-radius:999px;border:1px solid rgba(150,220,255,.25);z-index:2}
   /* ---- 主页大厅布局 ---- */
   #home{gap:10px}
@@ -141,7 +146,7 @@
   .home-beam.b1{left:18%}
   .home-beam.b2{left:64%;animation-delay:2.6s}
   @keyframes beam{0%,100%{transform:rotate(18deg) translateY(-6%)}50%{transform:rotate(18deg) translateY(6%)}}
-  .start-big{min-width:min(250px,46vw);padding:22px 30px;font-size:24px;letter-spacing:5px}
+  .start-big{min-width:min(260px,48vw);padding:24px 32px;font-size:26px;letter-spacing:6px}
   /* ---- 金色占位面板 ---- */
   .panel.gold{border:2px solid rgba(255,210,63,.65);box-shadow:0 0 30px rgba(255,190,60,.35), 0 12px 40px rgba(0,20,40,.4);
     background:linear-gradient(160deg,rgba(60,48,10,.55),rgba(8,50,82,.6))}
@@ -217,7 +222,7 @@
 
 <!-- 主菜单 -->
 <div class="overlay hidden" id="menu">
-  <h1 class="title">大鱼吃小鱼</h1>
+  <h1 class="title">开局捏鱼，吞遍深海</h1>
   <div class="subtitle">吃掉小鱼 · 躲避大鱼 · 成长为海洋之王</div>
   <div class="row" style="margin-top:8px">
     <button class="btn" id="btnSingle">单人模式</button>
@@ -299,7 +304,7 @@
     <i class="home-beam b2"></i>
   </div>
 
-  <h1 class="title">大鱼吃小鱼</h1>
+  <h1 class="title">开局捏鱼，吞遍深海</h1>
   <div class="subtitle">吃掉小鱼 · 躲避大鱼 · 成长为海洋之王</div>
 
   <div class="home-top">
@@ -420,7 +425,7 @@
 <script>
 "use strict";
 /* ============================================================
-   大鱼吃小鱼 · 经典街机版（上下左右移动，鱼从两侧游入）
+   开局捏鱼，吞遍深海 · 经典街机版（上下左右移动，鱼从两侧游入）
    ============================================================ */
 
 /* ---------- 工具 ---------- */
@@ -2703,16 +2708,160 @@ function buildBackground() {
   ctx = bgCtx;
   ctx.clearRect(0, 0, W, H);
   const g = ctx.createLinearGradient(0, 0, 0, H);
-  g.addColorStop(0, '#6fd4f0');
-  g.addColorStop(0.28, '#3fb6de');
-  g.addColorStop(0.6, '#1a92c6');
-  g.addColorStop(0.85, '#0f6ea3');
-  g.addColorStop(1, '#0a5a8c');
+  g.addColorStop(0, '#0e5a86');
+  g.addColorStop(0.3, '#0a4370');
+  g.addColorStop(0.6, '#072f56');
+  g.addColorStop(0.85, '#041d3c');
+  g.addColorStop(1, '#021224');
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, W, H);
   drawDistantReef();
   drawSeaweed('back');
   ctx = savedCtx;
+}
+
+/* ---- 深海大片背景装饰（夸张海洋大片风，纯确定性时间驱动，低成本） ---- */
+// 动态阴影：巨大生物从头顶掠过投下的暗影
+function drawDeepShadows(t) {
+  const sh = [
+    { y: 0.18, r: 0.42, sp: 0.012, ph: 0 },
+    { y: 0.70, r: 0.56, sp: 0.008, ph: 2.4 },
+    { y: 0.45, r: 0.30, sp: 0.016, ph: 4.1 },
+  ];
+  ctx.save();
+  for (const s of sh) {
+    const span = W + s.r * W * 2;
+    const x = W + s.r * W - ((t * s.sp * W + s.ph * W * 0.2) % span);
+    const y = s.y * H;
+    const g = ctx.createRadialGradient(x, y, 0, x, y, s.r * W * 0.6);
+    g.addColorStop(0, 'rgba(0,8,20,.36)');
+    g.addColorStop(1, 'rgba(0,8,20,0)');
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.ellipse(x, y, s.r * W * 0.7, s.r * H * 0.18, 0, 0, TAU);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+// 水流：斜向流动光丝，增强深海动感
+function drawCurrents(t) {
+  ctx.save();
+  ctx.globalAlpha = 0.10;
+  ctx.lineCap = 'round';
+  for (let i = 0; i < 7; i++) {
+    const y = ((i * 0.16 + 0.06) * H + t * 26) % (H * 1.1) - H * 0.05;
+    const x0 = (i % 2) ? -W * 0.1 : W * 0.05;
+    ctx.strokeStyle = '#9ff0ff';
+    ctx.lineWidth = 1 + (i % 3);
+    ctx.beginPath();
+    ctx.moveTo(x0, y);
+    ctx.bezierCurveTo(x0 + W * 0.3, y - 14, x0 + W * 0.6, y + 16, x0 + W * 1.1, y - 6);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+// 鱼群：成群的远景小鱼沿正弦路径游过
+function drawFishShoals(t) {
+  const shoals = [
+    { y: 0.24, n: 9, sp: 0.020, amp: 0.05, ph: 0, sc: 3.2 },
+    { y: 0.66, n: 12, sp: 0.014, amp: 0.07, ph: 2.2, sc: 2.6 },
+    { y: 0.50, n: 7, sp: 0.026, amp: 0.04, ph: 4.0, sc: 2.2 },
+  ];
+  ctx.save();
+  ctx.fillStyle = 'rgba(120,210,240,.5)';
+  for (const s of shoals) {
+    for (let i = 0; i < s.n; i++) {
+      const span = W + 80;
+      const x = W + 40 - (((t * s.sp * W + i * 15 + s.ph * 40) % span));
+      const y = s.y * H + Math.sin(t * 1.6 + i * 0.8 + s.ph) * s.amp * H;
+      const sc = s.sc;
+      ctx.beginPath();
+      ctx.ellipse(x, y, sc * 2.2, sc * 0.9, 0, 0, TAU);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(x - sc * 2.2, y);
+      ctx.lineTo(x - sc * 3.5, y - sc * 1.1);
+      ctx.lineTo(x - sc * 3.5, y + sc * 1.1);
+      ctx.closePath(); ctx.fill();
+    }
+  }
+  ctx.restore();
+}
+
+// 海底火山：底部橙红光晕 + 上升灼热气泡
+function drawVolcano(t) {
+  const vx = W * 0.72, vy = H;
+  ctx.save();
+  const flick = 0.75 + 0.25 * Math.sin(t * 3.1);
+  const g = ctx.createRadialGradient(vx, vy, 0, vx, vy, W * 0.55);
+  g.addColorStop(0, 'rgba(255,120,30,' + (0.34 * flick) + ')');
+  g.addColorStop(0.4, 'rgba(255,60,10,' + (0.16 * flick) + ')');
+  g.addColorStop(1, 'rgba(255,40,0,0)');
+  ctx.fillStyle = g;
+  ctx.fillRect(vx - W * 0.55, vy - W * 0.55, W * 1.1, W * 0.55);
+  ctx.fillStyle = 'rgba(20,10,6,.55)';
+  ctx.beginPath();
+  ctx.moveTo(vx - W * 0.07, vy);
+  ctx.quadraticCurveTo(vx, vy - W * 0.07, vx + W * 0.07, vy);
+  ctx.closePath(); ctx.fill();
+  for (let i = 0; i < 6; i++) {
+    const ph = (t * 0.6 + i * 0.17) % 1;
+    const px = vx + Math.sin(i * 2.4 + t * 2) * 22;
+    const py = vy - ph * W * 0.17;
+    ctx.globalAlpha = (1 - ph) * 0.5;
+    ctx.fillStyle = '#ffb060';
+    ctx.beginPath(); ctx.arc(px, py, 2 + ph * 4, 0, TAU); ctx.fill();
+  }
+  ctx.restore();
+}
+
+// 巨型海怪/鲨鱼剪影：缓慢掠过，压迫感拉满
+function drawMonster(t) {
+  const monsters = [
+    { y: 0.34, size: 0.85, period: 52, ph: 0, dir: 1 },
+    { y: 0.60, size: 1.30, period: 78, ph: 26, dir: -1 },
+  ];
+  for (const m of monsters) {
+    const prog = ((t + m.ph) % m.period) / m.period;
+    const x = m.dir > 0 ? (W + m.size * 0.4 - prog * (W + m.size * 0.8)) : (-m.size * 0.4 + prog * (W + m.size * 0.8));
+    const dir = m.dir > 0 ? -1 : 1;
+    drawMonsterSilhouette(x, m.y * H, m.size, dir, t);
+  }
+}
+
+function drawMonsterSilhouette(x, y, s, dir, t) {
+  const L = s * 260;
+  const bh = L * 0.34;
+  const sway = Math.sin(t * 0.8) * bh * 0.06;
+  ctx.save();
+  ctx.translate(x, y + sway);
+  ctx.scale(dir, 1);
+  ctx.globalAlpha = 0.30;
+  const grad = ctx.createLinearGradient(0, -bh, 0, bh);
+  grad.addColorStop(0, 'rgba(3,12,26,.85)');
+  grad.addColorStop(0.5, 'rgba(6,20,40,.7)');
+  grad.addColorStop(1, 'rgba(10,30,55,.55)');
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.moveTo(L * 0.5, 0);
+  ctx.quadraticCurveTo(L * 0.3, -bh * 0.8, L * 0.02, -bh * 0.35);
+  ctx.quadraticCurveTo(-L * 0.12, -bh * 0.15, -L * 0.2, 0);
+  ctx.quadraticCurveTo(-L * 0.34, bh * 0.55, -L * 0.36, bh * 0.15);
+  ctx.quadraticCurveTo(-L * 0.3, bh * 0.4, -L * 0.16, bh * 0.5);
+  ctx.quadraticCurveTo(L * 0.1, bh * 0.8, L * 0.36, bh * 0.2);
+  ctx.quadraticCurveTo(L * 0.46, -bh * 0.1, L * 0.5, 0);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(L * 0.05, -bh * 0.35);
+  ctx.quadraticCurveTo(L * 0.08, -bh * 0.9, L * 0.2, -bh * 0.2);
+  ctx.closePath(); ctx.fill();
+  ctx.globalAlpha = 0.75;
+  ctx.fillStyle = '#ff5a2a';
+  ctx.beginPath(); ctx.arc(L * 0.44, -bh * 0.08, bh * 0.07, 0, TAU); ctx.fill();
+  ctx.restore();
 }
 
 function drawBackground() {
@@ -2732,6 +2881,13 @@ function drawBackground() {
     ctx.closePath(); ctx.fill();
   }
   ctx.restore();
+
+  // 深海大片装饰层（动态阴影 → 海怪剪影 → 水流 → 鱼群 → 火山光）
+  drawDeepShadows(ambientT);
+  drawMonster(ambientT);
+  drawCurrents(ambientT);
+  if (Perf.quality < 2) drawFishShoals(ambientT);
+  drawVolcano(ambientT);
 }
 
 function drawScene() {
@@ -2784,10 +2940,10 @@ function drawHUD() {
   const p0 = players[0];
   if (p0 && p0.combo >= 2 && p0.comboTime > 0) {
     ctx.save();
-    ctx.fillStyle = '#ffd23f';
-    ctx.font = 'bold 26px "Microsoft YaHei"';
+    ctx.fillStyle = '#ff7a1a';
+    ctx.font = '900 34px "Microsoft YaHei"';
     ctx.textAlign = 'center';
-    ctx.fillText(`${p0.combo} 连击 x${Game.comboMul(p0).toFixed(1)}`, W / 2, Game.mode === 'single' ? 46 : 78);
+    ctx.fillText(`${p0.combo} 连击 x${Game.comboMul(p0).toFixed(1)}`, W / 2, Game.mode === 'single' ? 52 : 86);
     ctx.restore();
   }
 
@@ -2823,37 +2979,46 @@ function drawHUD() {
 function drawPlayerHUD(p, x, y, color, showScore) {
   ctx.save();
   ctx.textBaseline = 'top';
-  ctx.fillStyle = 'rgba(10,55,90,.5)';
-  roundRect(x, y, 220, 74, 14); ctx.fill();
-  ctx.strokeStyle = 'rgba(150,220,255,.28)'; ctx.lineWidth = 1.5;
-  roundRect(x, y, 220, 74, 14); ctx.stroke();
+  ctx.fillStyle = 'rgba(3,18,32,.7)';
+  roundRect(x, y, 220, 92, 16); ctx.fill();
+  ctx.strokeStyle = 'rgba(0,229,255,.5)'; ctx.lineWidth = 2;
+  roundRect(x, y, 220, 92, 16); ctx.stroke();
 
   const nameColor = color || '#7fd7ff';
-  ctx.font = 'bold 18px "Microsoft YaHei"';
+  ctx.font = '900 22px "Microsoft YaHei"';
   ctx.fillStyle = nameColor;
   ctx.textAlign = 'left';
-  ctx.fillText(p.playerIndex === 0 ? 'P1 玩家' : 'P2 玩家', x + 14, y + 10);
+  ctx.fillText(p.playerIndex === 0 ? 'P1' : 'P2', x + 14, y + 9);
 
   for (let i = 0; i < 3; i++) {
-    const hx = x + 14 + i * 22, hy = y + 36;
-    if (i < p.lives) { ctx.fillStyle = '#ff4f6e'; heart(hx, hy, 9); ctx.fill(); }
-    else { ctx.strokeStyle = 'rgba(255,255,255,.3)'; ctx.lineWidth = 1.5; heart(hx, hy, 9); ctx.stroke(); }
+    const hx = x + 56 + i * 26, hy = y + 20;
+    if (i < p.lives) { ctx.fillStyle = '#ff3b30'; heart(hx, hy, 11); ctx.fill(); }
+    else { ctx.strokeStyle = 'rgba(255,255,255,.32)'; ctx.lineWidth = 2; heart(hx, hy, 11); ctx.stroke(); }
   }
 
   if (showScore) {
-    ctx.fillStyle = '#fff';
-    ctx.font = 'bold 15px "Microsoft YaHei"';
     ctx.textAlign = 'right';
-    ctx.fillText(Math.floor(p.score) + ' 分', x + 206, y + 38);
+    ctx.font = '900 22px "Microsoft YaHei"';
+    ctx.fillStyle = '#ff8c1a';
+    ctx.fillText(Math.floor(p.score), x + 206, y + 8);
+    ctx.font = '800 11px "Microsoft YaHei"';
+    ctx.fillStyle = '#ffe6c4';
+    ctx.fillText('SCORE', x + 206, y + 32);
   }
 
-  ctx.fillStyle = 'rgba(255,255,255,.2)';
-  roundRect(x + 14, y + 58, 192, 6, 3); ctx.fill();
+  const lv = Math.floor((p.size - 10) / 14) + 1;
+  ctx.textAlign = 'left';
+  ctx.font = '900 14px "Microsoft YaHei"';
+  ctx.fillStyle = '#dff6ff';
+  ctx.fillText('Lv ' + lv, x + 14, y + 46);
+
+  ctx.fillStyle = 'rgba(255,255,255,.15)';
+  roundRect(x + 14, y + 66, 192, 15, 7); ctx.fill();
   const growth = clamp((p.size - 10) / 140, 0, 1);
   const gg = ctx.createLinearGradient(x + 14, 0, x + 206, 0);
-  gg.addColorStop(0, '#24c26d'); gg.addColorStop(1, '#ffd23f');
+  gg.addColorStop(0, '#00e5ff'); gg.addColorStop(0.6, '#24c26d'); gg.addColorStop(1, '#ff7a1a');
   ctx.fillStyle = gg;
-  roundRect(x + 14, y + 58, 192 * growth, 6, 3); ctx.fill();
+  if (growth > 0) roundRect(x + 14, y + 66, 192 * growth, 15, 7); ctx.fill();
   ctx.restore();
 }
 
